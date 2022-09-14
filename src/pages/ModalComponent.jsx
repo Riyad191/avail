@@ -1,18 +1,15 @@
-import React from "react";
-import AddIcon from "@mui/icons-material/Add";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 import {
-  Fab,
-  Modal,
-  Tooltip,
-  Box,
   Typography,
-  Avatar,
-  TextField,
-  Stack,
   Button,
+  Stack,
+  TextField,
+  Modal,
   ButtonGroup,
+  Avatar,
 } from "@mui/material";
-import styled from "@emotion/styled";
 import {
   EmojiEmotions,
   PersonAdd,
@@ -31,34 +28,27 @@ const UserBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   gap: "10px",
+  height: 400,
   marginBottom: "20px",
 }));
 
-const Add = () => {
-  const [open, setOpen] = React.useState(false);
+const ModalComponent = ({ setShowModal, showModal, mode }) => {
+  console.log("card", mode);
   return (
     <>
-      <Tooltip
-        onClick={(e) => setOpen(true)}
-        title="Add"
-        sx={{
-          position: "fixed",
-          bottom: 20,
-          left: { xs: "calc(50% - 25px)", md: 30 },
-        }}
+      <StyledModal
+        bgcolor={"background.default"}
+        open={showModal}
+        onClose={() => setShowModal(false)}
       >
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </Tooltip>
-      <StyledModal open={open} onClose={(e) => setOpen(false)}>
         <Box
-          width={400}
-          height={280}
+          width={1200}
+          height={700}
           p={3}
           borderRadius={5}
-          bgcolor={"background.default"}
-          color={"text.primary"}
+          // bgcolor={"background.default"}
+          sx={{ background: mode ? "#252525" : "white" }}
+          // color={"text.primary"}
         >
           <Typography variant="h6" color="gray" textAlign="center">
             Create Post
@@ -99,4 +89,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default ModalComponent;
