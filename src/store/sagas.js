@@ -5,7 +5,7 @@ import * as actionTypes from "./actions";
 export const handleGetUsers = function* () {
   try {
     const response = yield call(fetchGetUsers);
-    // console.log("usersSaga:", response.data);
+    console.log("usersSaga:", response.data);
     yield put({
       type: actionTypes.GET_USERS_SUCCESS,
       payload: response.data,

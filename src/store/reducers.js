@@ -9,7 +9,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_USERS_PENDING:
+    case actionTypes.GET_USERS:
       return { stateUsers: [], loading: true, error: "" };
     // return { ...state, loading: true };
     case actionTypes.GET_USERS_SUCCESS:

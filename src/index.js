@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { createStore, applyMiddleware } from "redux";
-import allReducers from "./redux/reducer";
+import allReducers from "./store/reducers";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./redux/rootSaga";
+import rootSaga from "./store/rootSaga";
 import { createLogger } from "redux-logger";
 
 // logger
@@ -16,7 +16,7 @@ var logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
 // middleware
-const middleware = [sagaMiddleware, logger];
+const middleware = [sagaMiddleware];
 
 // store
 var store = createStore(
