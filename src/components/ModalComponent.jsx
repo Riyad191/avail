@@ -50,8 +50,8 @@ const ModalComponent = ({ setShowModal, showModal, mode }) => {
           sx={{ background: mode ? "#252525" : "white" }}
           // color={"text.primary"}
         >
-          <Typography variant="h6" color="gray" textAlign="center">
-            Create Post
+          <Typography variant="h1" color="gray" textAlign="center">
+            Tool Information
           </Typography>
           <UserBox>
             <Avatar />

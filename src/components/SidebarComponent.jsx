@@ -16,29 +16,29 @@ import { Mail, Notifications } from "@mui/icons-material";
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
+  width: "100%",
+  // border: "solid white 2px",
 });
 
 const Icons = styled(Box)(({ theme }) => ({
-  display: "none",
   alignItems: "center",
   gap: 20,
-  [theme.breakpoints.up("sm")]: {
-    display: "flex",
-  },
-}));
-const UserBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: 10,
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
 }));
 
 const Navebar = ({ mode, setMode }) => {
   return (
     <AppBar
-      sx={{ background: mode ? "black" : "rgb(23, 27, 72)" }}
+      sx={{
+        background: mode ? "black" : "rgb(23, 27, 72)",
+        display: "flex",
+        // justifyContent: "space-between",
+        alignItems: "center",
+        width: "100%",
+        // border: "solid red 4px",
+        height: "7%",
+        // height: "70px",
+        margin: 0,
+      }}
       position="sticky"
     >
       <StyledToolbar>

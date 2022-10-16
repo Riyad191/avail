@@ -7,9 +7,11 @@ import CardsComponent from "./CardsComponent";
 import ModalComponent from "./ModalComponent";
 import { styled } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
+import FooterComponent from "./FooterComponent";
+import { grey } from "@mui/material/colors";
 
 const StyledBox = styled(Box)(() => ({
-  margin: 30,
+  margin: "0 20px",
 }));
 
 const Tools = () => {
@@ -24,18 +26,30 @@ const Tools = () => {
   return (
     <>
       <ThemeProvider theme={darkTheme}>
-        <Paper sx={{ height: "100vh" }} bgcolor={"backgroud.default"}>
+        <Paper
+          sx={{
+            height: "100vh",
+            // border: "solid red 4px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "column",
+            background: "#F1F1F1",
+          }}
+          bgcolor={"backgroud.default"}
+        >
           <SidebarComponent setMode={setMode} mode={mode} />
           <StyledBox>
             <ButtonsComponent />
             <FormComponent />
-            <CardsComponent setShowModal={setShowModal} />
-            <ModalComponent
+            <CardsComponent setShowModal={setShowModal} showModal={showModal} />
+            {/* <ModalComponent
               mode={mode}
               setShowModal={setShowModal}
               showModal={showModal}
-            />
+            /> */}
           </StyledBox>
+          <FooterComponent />
         </Paper>
       </ThemeProvider>
     </>
