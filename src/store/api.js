@@ -1,14 +1,16 @@
-import axios from "axios";
-// const url = "https://jsonplaceholder.typicode.com/users";
+import BASE_URL from "../utils/base_url";
+const url = "/availability/5";
 
 const fetchGetUsers = () => {
-  const callApi = axios
-    .get("https://jsonplaceholder.typicode.com/users")
-    .then((response) => response)
+  const fetchApi = BASE_URL.get(url)
+    .then((response) => {
+      console.log("utilsApi:", response);
+      return response;
+    })
     .catch((error) => {
       throw error;
     });
-  return callApi;
+  return fetchApi;
 };
 
 export default fetchGetUsers;
