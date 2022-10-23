@@ -13,18 +13,16 @@ import {
 const StyledButton = styled(Button)({
   height: 50,
   width: "16%",
-  // color: "#0287AB",
   color: "#FFF",
-  border: "solid 1px #0287AB",
-
-  background: "#0287AB",
-  // background: "rgb(23, 27, 72)",
+  border: "solid 1px rgb(23, 27, 72)",
+  background: "rgb(23, 27, 72)",
   display: "flex",
   justifyContent: "space-between",
   paddingRight: 3,
+
   alignItems: "center",
   "&:hover": {
-    color: "#0287AB",
+    color: "rgb(23, 27, 72)",
   },
 });
 
@@ -42,15 +40,22 @@ const ButtonsComponent = () => {
     <Box
       sx={{
         color: "#142A7C",
-        // border: "solid red 1px",
-        paddingTop: "10px",
+        width: "100%",
         margin: 0,
       }}
     >
-      <StyledStack direction="row" spacing={2}>
-        {pillars.map((pillar) => {
+      <StyledStack
+        direction="row"
+        spacing={2}
+        sx={
+          {
+            // width: "100%",
+          }
+        }
+      >
+        {pillars.map((pillar, idx) => {
           return (
-            <StyledButton variant="outlined">
+            <StyledButton key={idx} variant="outlined">
               <IconTyopgraphy>{pillar.icon}</IconTyopgraphy>
               <Typography fontSize={14}> {pillar.name}</Typography>
               <Typography sx={{ width: 25 }}></Typography>

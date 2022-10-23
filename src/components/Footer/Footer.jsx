@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 
-import lightModeLogo from "./Images/logo-light-mode.png";
+import lightModeLogo from "../../images/logo-light-mode.png";
 import { styled, Box } from "@mui/material";
 
 export const FooterBox = styled(Box)(() => ({

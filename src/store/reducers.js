@@ -10,14 +10,11 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USERS:
-      // return { stateUsers: [], loading: true, error: "" };
-      return { ...state, loading: true };
+      return { stateUsers: [], loading: true, error: "" };
     case actionTypes.GET_USERS_SUCCESS:
-      return { ...state, stateUsers: action.payload };
-    // return { ...state, loading: false, users: action.users };
+      return { stateUsers: action.payload, loading: false, error: "" };
     case actionTypes.GET_USERS_FAILED:
-      return { ...state, error: action.message };
-    // return { ...state, loading: false, error: action.message };
+      return { stateUsers: [], loading: false, error: action.message };
     default:
       return state;
   }

@@ -23,7 +23,8 @@ const FormComponent = () => {
         sx={{
           // margin: "10px 0",
           // border: "solid #DCDCDC 1px",
-          width: "80%",
+          // width: "80%",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           padding: "9px 0",

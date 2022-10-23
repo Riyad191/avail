@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const BASE_URL = axios.create({
-  baseURL: "https://csi-avail-api.dev.walmart.com",
+  baseURL: "http://localhost:5000",
 });
 
 export default BASE_URL;

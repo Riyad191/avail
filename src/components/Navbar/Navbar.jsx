@@ -1,7 +1,8 @@
 import React from "react";
 import { DarkMode, LightMode } from "@mui/icons-material";
-import darkModeLogo from "./Images/logo-dark-mode.png";
-import lightModeLogo from "./Images/logo-light-mode.png";
+import darkModeLogo from "../../images/logo-dark-mode.png";
+import lightModeLogo from "../../images/logo-light-mode.png";
+import "../../styles/styles.css";
 import {
   AppBar,
   styled,
@@ -11,6 +12,7 @@ import {
   Badge,
   Avatar,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import { Mail, Notifications } from "@mui/icons-material";
 
 const StyledToolbar = styled(Toolbar)({
@@ -38,6 +40,7 @@ const Navebar = ({ mode, setMode }) => {
         height: "7%",
         // height: "70px",
         margin: 0,
+        // position: "fixed",
       }}
       position="sticky"
     >
@@ -45,16 +48,16 @@ const Navebar = ({ mode, setMode }) => {
         <Toolbar
           sx={{
             // border: "solid 1px white",
-            width: "40%",
+            width: "45%",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
+            margin: "0 0 5px -40px",
           }}
         >
           <Typography
+            variant="div"
             sx={{
-              marginBottom: "-5px",
-
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -80,28 +83,33 @@ const Navebar = ({ mode, setMode }) => {
             )}
             <Typography variant="h6">OSCS</Typography>
           </Typography>
-          <Typography variant="subtitle1">Tools</Typography>
+          <Link to="/">
+            <Typography variant="subtitle1">Tools</Typography>
+          </Link>
+          <Link to="/availability">
+            <Typography variant="subtitle1">Availability</Typography>
+          </Link>
           <Typography variant="subtitle1">Data</Typography>
           <Typography variant="subtitle1">Infomartion</Typography>
           <Typography variant="subtitle1">Projects</Typography>
         </Toolbar>
         <Icons display="flex">
-          <Badge>
+          {/* <Badge>
             <Typography
               sx={{ cursor: "pointer" }}
               onClick={() => setMode(!mode)}
             >
               {mode ? <LightMode /> : <DarkMode />}
             </Typography>
-          </Badge>
-          <Badge badgeContent={4} color="error">
+          </Badge> */}
+          {/* <Badge badgeContent={4} color="error">
             <Mail />
           </Badge>
           <Badge badgeContent={4} color="error">
             <Notifications />
-          </Badge>
-          <Typography variant="span"> Hello Riyadh </Typography>
-          <Avatar />
+          </Badge> */}
+          {/* <Typography variant="span"> Hello Riyadh </Typography> */}
+          {/* <Avatar /> */}
         </Icons>
       </StyledToolbar>
     </AppBar>

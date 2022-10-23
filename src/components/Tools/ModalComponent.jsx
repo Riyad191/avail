@@ -46,9 +46,7 @@ const ModalComponent = ({ setShowModal, showModal, mode }) => {
           height={700}
           p={3}
           borderRadius={5}
-          // bgcolor={"background.default"}
           sx={{ background: mode ? "#252525" : "white" }}
-          // color={"text.primary"}
         >
           <Typography variant="h1" color="gray" textAlign="center">
             Tool Information

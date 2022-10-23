@@ -2,8 +2,6 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import { Typography, Card, Box, Avatar, Stack, Modal } from "@mui/material";
 
-import "../App.css";
-
 const CardsComponent = ({ setShowModal }) => {
   let cards = [];
   for (let i = 0; i < 20; i++) {
@@ -17,7 +15,7 @@ const CardsComponent = ({ setShowModal }) => {
     // height: "40%",
     height: "600px",
     overflow: "auto",
-    width: "80%",
+    width: "100%",
     background: "#FFF",
     marginBottom: "10px",
     // border: "solid grey 2px",
@@ -75,7 +73,7 @@ const CardsComponent = ({ setShowModal }) => {
     <CardsBox className="cardScrollbar">
       {cards.map((_, idx) => {
         return (
-          <StyeldCard>
+          <StyeldCard key={idx}>
             <StyledParentBox>
               <Box sx={{ width: "100%", textDecoration: "left" }}>
                 <Typography variant="h5">Tool</Typography>
