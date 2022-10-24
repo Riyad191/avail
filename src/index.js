@@ -16,7 +16,10 @@ var logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
 // middleware
-const middleware = [sagaMiddleware, logger];
+const middleware = [
+  sagaMiddleware,
+  // logger
+];
 
 // store
 var store = createStore(
