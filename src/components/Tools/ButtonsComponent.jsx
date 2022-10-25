@@ -47,11 +47,7 @@ const ButtonsComponent = () => {
       <StyledStack
         direction="row"
         spacing={2}
-        sx={
-          {
-            // width: "100%",
-          }
-        }
+      
       >
         {pillars.map((pillar, idx) => {
           return (

@@ -1,32 +1,32 @@
 import React, { useEffect } from "react";
 import "./styles.css";
 import { Typography } from "@mui/material";
-import { ress, arrowColor } from "./Availability_Data_Processor";
+import { formatAvailabilityData, dataArrowsAndColors } from "./Data_Processor";
 import { ArrowBox, MainBox, DataCard, SectionBox, BoxFn, BoxKey, StackData} from "./styles";
-import Availablitiy_Info from "./Availablitiy_Info";
-import Availability_Cards_Title from "./Availability_Cards_Title";
+import Card_Info from "./Card_Info";
+import Availability_Cards_Title from "./Card_Title";
 import Loading_Error from "./Loading_Error";
 
-const showItem = localStorage.getItem("showData");
+const showItem = localStorage.getItem("extendCard");
 const getLocalStoreage = () => showItem ? showItem : -1;
 
-function Avail({ apps }) {
+function Availability({ apps }) {
   const [show, setShow] = React.useState(getLocalStoreage());
   const showDetails = x => show == x ? setShow(-1) : setShow(x);
 
-  useEffect(()=> localStorage.setItem("showData", show), [show])
+  useEffect(()=> localStorage.setItem("extendCard", show), [show])
 
   return (
     <MainBox className="fonts">
       <Loading_Error />
-      {apps.map((a, i) => {
+      {apps.map((item, index) => {
         return (
-          <DataCard className="card" key={i} onClick={() => showDetails(i)}>
-            <Availability_Cards_Title a={a} />
+          <DataCard className="card" key={index} onClick={() => showDetails(index)}>
+            <Availability_Cards_Title data={item} />
             <SectionBox>
               <StackData direction="row">
-                {ress(a).map((a, i) => {
-                  const xxx = arrowColor(a.value);
+                {formatAvailabilityData(item).map((a, i) => {
+                  const xxx = dataArrowsAndColors(a.value);
                   return (
                     <BoxFn key={i}>
                       <Typography sx={{ color: xxx.color, textAlign: "center"}}>{a.value}</Typography>
@@ -35,9 +35,9 @@ function Avail({ apps }) {
                   );
                 })}
               </StackData>
-              <BoxKey>{ress(a).map((a, i) => <h4 key={i}>{a.key}</h4>)}</BoxKey>
+              <BoxKey>{formatAvailabilityData(item).map((a, i) => <h4 key={i}>{a.key}</h4>)}</BoxKey>
             </SectionBox>
-            <Availablitiy_Info a={a} show={show} i={i} />
+            <Card_Info data={item} show={show} index={index} />
           </DataCard>
         );
       })}
@@ -45,4 +45,4 @@ function Avail({ apps }) {
   );
 }
 
-export default Avail;
+export default Availability;

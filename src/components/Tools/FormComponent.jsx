@@ -38,7 +38,7 @@ const FormComponent = () => {
           <TextField
             sx={{ width: 260, mr: 3, bgcolor: "#FFF" }}
             id="outlined-basic"
-            label="Outlined"
+            label="Search"
             placeholder="Search"
             variant="outlined"
             size="small"
@@ -46,7 +46,7 @@ const FormComponent = () => {
           <TextField
             sx={{ width: 260, mr: 3, bgcolor: "#FFF" }}
             id="outlined-basic"
-            label="Outlined"
+            label="Search"
             placeholder="Search"
             variant="outlined"
             size="small"
@@ -54,7 +54,7 @@ const FormComponent = () => {
           <TextField
             sx={{ width: 260, mr: 3, bgcolor: "#FFF" }}
             id="outlined-basic"
-            label="Outlined"
+            label="Search"
             placeholder="Search"
             variant="outlined"
             size="small"
@@ -67,26 +67,15 @@ const FormComponent = () => {
             justifyContent: "space-between",
           }}
         >
-          <FormControl
-            sx={{ minWidth: 120, ml: 4, bgcolor: "#FFF" }}
-            size="small"
+          <div
+            style={{
+              border: "solid 1px grey",
+              padding: 10,
+              
+            }}
           >
-            <InputLabel id="demo-select-small">Age</InputLabel>
-            <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
+            <h3>FULFILLMENT</h3>
+          </div>
         </Box>
       </Box>
     </>

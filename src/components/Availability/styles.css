@@ -1,20 +1,7 @@
 body {
   font-family: "Nunito", sans-serif;
 }
-table {
-  height: 100%;
-  width: 100%;
-  font-size: 16px;
-}
-th {
-  width: 33%;
-  background: #e2e2e2;
-  border-radius: 4px;
-}
-td {
-  border-radius: 4px;
-  width: 33%;
-}
+ 
 .section {
   background: #e2e2e2;
 }
