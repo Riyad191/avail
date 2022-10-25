@@ -25,7 +25,7 @@ export const MainBox = styled(Box)(() => ({
 export const DataBars = styled(Box)(() => ({
   height: "50px",
   width: "7px",
-  borderRadius: "40px"
+  borderRadius: "40px",
 }));
 
 export const DataCard = styled(Box)(() => ({
@@ -105,45 +105,53 @@ export const StackData = styled(Stack)(() => ({
 }));
 
 export const TabBoxMain = styled(Box)(() => ({
-    width: "100%",
-    typography: "body1",
-    height: "100%",
-    overflow: "auto",
-  }));
+  width: "100%",
+  typography: "body1",
+  height: "100%",
+  overflow: "auto",
+}));
 
 export const TabBox = styled(Box)(() => ({
-    overflow: "auto",
-    height: "98.70%",
-    background: "#FFF",
-    margin: "0 10px",
-    borderRadius: 1,
-    border: "#CFCFCF solid 1px",
-  }));
-  export const CardTitle = styled(Stack)(() => ({
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-  }));
+  overflow: "auto",
+  height: "98.70%",
+  background: "#FFF",
+  margin: "0 10px",
+  borderRadius: 1,
+  border: "#CFCFCF solid 1px",
+}));
+export const CardTitle = styled(Stack)(() => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+}));
 
-  export const Element = styled(Box)(() => ({
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    width: "33%",
-  }));
+export const Element = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  width: "33%",
+}));
 
-  export const Title = styled(Box)(() => ({
-    margin: "5px 0",
-    width: "100%",
-    textAlign: "center",
-    background: "#e2e2e2",
-    padding: "5px 0",
-    borderRadius: "3px",
-  }));
+export const Title = styled(Box)(() => ({
+  margin: "5px 0",
+  width: "100%",
+  textAlign: "center",
+  background: "#e2e2e2",
+  padding: "5px 0",
+  borderRadius: "3px",
+}));
 
-  export const Info = styled(Box)(() => ({
-    fontSize: "14px",
-    marginBottom: "5px",
-  }));
+export const Info = styled(Box)(() => ({
+  fontSize: "14px",
+  marginBottom: "5px",
+}));
+
+export const Uptime = styled(Box)(() => ({
+  width: " 100%",
+  textAlign: "left",
+  fontSize: "10px",
+  padding: "0 0 2px 5px",
+  fontWeight: "bold",
+}));
