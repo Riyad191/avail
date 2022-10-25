@@ -1,22 +1,3 @@
-body {
-  font-family: "Nunito", sans-serif;
-}
- 
-.section {
-  background: #e2e2e2;
-}
-.fonts {
-  font-family: "Nunito", sans-serif;
-}
-.info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.info p {
-  font-size: 12px;
-}
 .span {
   height: 10px;
   width: 10px;
@@ -24,30 +5,11 @@ body {
   border-radius: 50%;
   background: green;
 }
-.info_percentage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.line {
-  height: 40px;
-  width: 1px;
-  background: #e2e2e2;
-}
+ 
 .day {
   width: 100%;
   text-align: left;
   font-size: 10px;
   padding: 0 0 2px 5px;
   font-weight: bold;
-}
-.bars {
-  height: 50px;
-  width: 7px;
-  border-radius: 40px;
-}
-.table_title{
-  height: 40%;
-  width: 100%;
-  text-align: center;
 }

@@ -22,6 +22,12 @@ export const MainBox = styled(Box)(() => ({
   color: "#636363",
 }));
 
+export const DataBars = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px"
+}));
+
 export const DataCard = styled(Box)(() => ({
   border: "#FFF solid 1px",
   background: "#FFF",

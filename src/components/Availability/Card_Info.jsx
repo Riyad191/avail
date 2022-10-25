@@ -1,28 +1,41 @@
 import React from "react";
-import { BoxInfo, BoxPercentage, BoxInfoSection} from "./styles";
-
-
+import { BoxInfo, BoxPercentage, BoxInfoSection, DataBars} from "./styles";
+import { Typography, Box, Stack } from "@mui/material";
 
 function Availablitiy_Info({ data, show, index }) {
+
   return (
     // show == index && (
       <BoxInfo>
         <BoxInfoSection>
-          {data.details.map((a, i) => <p key={i} className="bars" style={{ background: a == 2 ? "red" : "green"}}></p>)}
+          {data.details.map((x, i) => <DataBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></DataBars>)}
         </BoxInfoSection>
-        <div className="day">{data.day}% uptime in last 24 hours</div>
+        <Box className="day">{data.day}% uptime in last 24 hours</Box>
         <BoxPercentage>
-          <div className="info"><p>Available CPU</p><div className="info_percentage"><div className="span"></div> {data.availableCPU}%</div></div>
-          <div className="line"></div>
-          <div className="info"><p>Available Memory</p><div className="info_percentage"><div className="span"></div> {data.availableMemory}%</div></div>
-          <div className="line"></div>
-          <div className="info"><p>System Load</p><div className="info_percentage"><div className="span"></div> {data.systemLoad}%</div></div>
-          <div className="line"></div>
-          <div className="info"><p>Respone Time</p><div className="info_percentage"><div className="span"></div>{data.responeTime}%</div></div>
+        {info(data).map(x => {
+          return(
+            <Box>
+              <Typography variant="body2" color="#000" >{Object.keys(x)}</Typography>
+              <Stack direction="row" sx={{justifyContent:"center", alignItems: "center"}}>
+              <Box className="span"></Box>{Object.values(x)}%</Stack>
+            </Box>)}
+          ) 
+        } 
         </BoxPercentage>
       </BoxInfo>
     // )
   );
 }
 
+const info = (data) => {
+ return [
+   { "Available CPU": data.availableCPU },
+   { "Available Memory": data.availableMemory },
+   { "System Load": data.systemLoad },
+   { "Respone Time": data.responeTime }
+ ]
+}
+
+
 export default Availablitiy_Info;
+ 

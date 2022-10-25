@@ -17,7 +17,7 @@ function Availability({ apps }) {
   useEffect(()=> localStorage.setItem("extendCard", show), [show])
 
   return (
-    <MainBox className="fonts">
+    <MainBox>
       <Loading_Error />
       {apps.map((item, index) => {
         return (
