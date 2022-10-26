@@ -11,18 +11,5 @@ export default function LabTabs() {
   const [apps, setApps] = useState([]);
   useEffect(() => { dispatch({ type: GET_USERS })}, [dispatch]);
   useEffect(() => setApps(availData.map((data) => Object.values(data)).splice(0, 1).flat(Infinity)),[availData]);
-  return <TabBoxMain><TabBox><Availability apps={apps}/></TabBox></TabBoxMain>
+  return <TabBoxMain><TabBox><Availability apps={apps} /></TabBox></TabBoxMain>
 }
-  
- 
-    
-    
-   
-  
-
- 
-
- 
-
-
- 

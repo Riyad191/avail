@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import styled from "@emotion/styled";
 
 export const ArrowBox = styled(Box)(() => ({
@@ -28,7 +28,7 @@ export const DataBars = styled(Box)(() => ({
   borderRadius: "40px",
 }));
 
-export const DataCard = styled(Box)(() => ({
+export const DataCard = styled(Button)(() => ({
   border: "#FFF solid 1px",
   background: "#FFF",
   display: "flex",
@@ -36,11 +36,12 @@ export const DataCard = styled(Box)(() => ({
   justifyContent: "center",
   alignItems: "center",
   borderRadius: 5,
-  height: "24%",
+  // height: "20%",
   width: "32%",
   margin: 8,
   boxShadow: "2px 2px 8px 2px #CFCFCF",
   cursor: "pointer",
+  color: "#000A37"
 }));
 
 export const SectionBox = styled(Box)(() => ({
@@ -141,6 +142,7 @@ export const Title = styled(Box)(() => ({
   background: "#e2e2e2",
   padding: "5px 0",
   borderRadius: "3px",
+  color: "#000"
 }));
 
 export const Info = styled(Box)(() => ({
