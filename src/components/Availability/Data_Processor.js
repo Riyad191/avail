@@ -1,5 +1,4 @@
-import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
-import { CgArrowsExchangeV } from "react-icons/cg";
+
 
 export const formatAvailabilityData = (f) => {
     // console.log("fff",Object.keys(f).map(a => +a).filter(a => typeof a == "number"))
@@ -9,16 +8,32 @@ export const formatAvailabilityData = (f) => {
     }).filter((ele) => ele !== undefined)
 };
 
-export const dataArrowsAndColors = v => +v == 0 ? obj.success : +v > 0.5 ? obj.denger : obj.warning;
 
-const obj = {
-    success: { color: "#367600", icon: <BiUpArrowAlt /> },
-    denger: { color: "#DC0909", icon: <BiDownArrowAlt /> },
-    warning: { color: "#FA9235", icon: <CgArrowsExchangeV /> }
-}
 
 export const cardTitle = {
     appName: "App Name",
     serviceName: "Service Name",
     flow: "Flow"
   }
+
+
+
+//   const d = new Date()
+//   const date = d.toISOString().slice(0,10)
+  
+//  2022-10-28 
+//  const array = fiveMinsData.map(a => a.glb_url)
+//  let users = [];
+//  let promises = [];
+//  for (let i = 0; i < array.length; i++) {
+//    for(let i = 1; i < 5; i++){
+//      let d = new Date();
+//      d.setDate(d.getDate() -1 )
+//      promises.push(
+//        axios.get(`https://oscs-sre-api.dev.walmart.com/availability/detailed_avail_percent?glb_url=${array[i]}&&date_frequency=5mins&&create_date=${d.toString()}`).then(response => {
+//              users.push(response.data.flat(1));
+//            })
+//          )
+//        }
+//      }
+//  Promise.all(promises).then(() => console.log( "glb_url", users ));

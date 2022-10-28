@@ -9,8 +9,8 @@ function Card_Title({ data }) {
   return (
     <CardTitle direction="row">
       <Element> <Title>{charactersLimit(data.app_name)}</Title></Element>
+      <Element> <Title>{data.flow_name}</Title></Element>
       <Element> <Title>{charactersLimit(data.service_name)}</Title></Element>
-      <Element> <Title_1>{data.flow_name}</Title_1></Element>
     </CardTitle>
   );
 }
