@@ -16,6 +16,9 @@ const Add = ({data, show, index, openModal, setOpenModal}) => {
   }
 
 
+  
+
+
   return (
     <>
       {show == index &&  <SytledModal
@@ -35,12 +38,12 @@ const Add = ({data, show, index, openModal, setOpenModal}) => {
             flexWrap: "wrap",
             padding: "0 20px",
             borderRadius: "5px" }} >
-            {data.details.map((x,i) => {
+            {/* {data.details.map((x,i) => {
             return <DataBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></DataBars>
-            })}
-            {/* {arr.map((_,i) => {
-            return <Box key={i} bgcolor="green" m={.5} sx={{ height: "100px", borderRadius: "40px", width: '7px' }} ></Box>
             })} */}
+            {arr.map((_,i) => {
+            return <Box key={i} bgcolor="green" m={.1} sx={{ height: "20px", borderRadius: "40px", width: '3px' }} ></Box>
+            })}
         </Box>
       </SytledModal>}
     </>

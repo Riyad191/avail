@@ -11,7 +11,7 @@ const FormComponent = () => {
           <TextField sx={{ width: 260, mr: 3, bgcolor: "#FFF" }} id="outlined-basic" label="Search" placeholder="Search" variant="outlined" size="small"/>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Typography style={{ border: "solid 1px grey", padding: 10 }}><h3>FULFILLMENT</h3></Typography>
+          <Typography variant="div" style={{ border: "solid 1px grey", padding: 10 }}><h3>FULFILLMENT</h3></Typography>
         </Box>
       </Box>
     </>

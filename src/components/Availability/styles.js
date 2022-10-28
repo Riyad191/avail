@@ -144,6 +144,15 @@ export const Title = styled(Box)(() => ({
   borderRadius: "3px",
   color: "#000"
 }));
+export const Title_1 = styled(Box)(() => ({
+  margin: "5px 0",
+  width: "60%",
+  textAlign: "center",
+  background: "#e2e2e2",
+  padding: "5px 0",
+  borderRadius: "3px",
+  color: "#000"
+}));
 
 export const Info = styled(Box)(() => ({
   fontSize: "14px",
