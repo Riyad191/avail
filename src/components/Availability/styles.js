@@ -26,6 +26,7 @@ export const DataBars = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
+  background: "green"
 }));
 
 export const DataCard = styled(Button)(() => ({
