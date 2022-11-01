@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Modal, styled } from "@mui/material";
+import { Box, Modal, styled, Tooltip } from "@mui/material";
 import { DataBars } from "./styles";
 
 const SytledModal = styled(Modal)({
@@ -8,7 +8,7 @@ const SytledModal = styled(Modal)({
   justifyContent: "center",
 });
 
-const Add = ({data, show, index, openModal, setOpenModal}) => {
+const PopUpModel = ({data, matchIndex, index, openModal, setOpenModal, modalDates}) => {
 
   let arr = []
   for (let i = 0; i < 288; i++) {
@@ -21,7 +21,7 @@ const Add = ({data, show, index, openModal, setOpenModal}) => {
 
   return (
     <>
-      {show == index &&  <SytledModal
+      {matchIndex == index &&  <SytledModal
         open={openModal}
         onClose={(e) => setOpenModal(false)}
         aria-labelledby="modal-modal-title"
@@ -38,11 +38,15 @@ const Add = ({data, show, index, openModal, setOpenModal}) => {
             flexWrap: "wrap",
             padding: "0 20px",
             borderRadius: "5px" }} >
-            {/* {data.details.map((x,i) => {
-            return <DataBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></DataBars>
-            })} */}
-            {arr.map((_,i) => {
-            return <Box key={i} bgcolor="green" m={.1} sx={{ height: "20px", borderRadius: "40px", width: '3px' }} ></Box>
+            {modalDates.map((x,i) => {
+                    const a = x.map(a => a.create_date)
+                    console.log("kkkk obj",a)
+                    console.log("modal dates",modalDates)
+            return <Box key={i} >
+                     <Tooltip title={`${a.slice(0,10)}(${a.slice(11,19)})`} arrow>
+                     <DataBars></DataBars> 
+                   </Tooltip>
+            </Box>
             })}
         </Box>
       </SytledModal>}
@@ -50,4 +54,5 @@ const Add = ({data, show, index, openModal, setOpenModal}) => {
   );
 };
 
-export default Add;
+
+export default PopUpModel;

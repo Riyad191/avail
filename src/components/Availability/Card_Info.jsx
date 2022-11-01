@@ -29,24 +29,6 @@ function Availablitiy_Info({ data, show, index, openModal, setOpenModal }) {
           ) 
         } 
         </BoxPercentage>
-        {/* {show == index &&  <SytledModal
-           open={openModal}
-           onClose={(e) => setOpenModal(false)}
-           aria-labelledby="modal-modal-title"
-           aria-describedby="modal-modal-description"
-           sx={{ cursor: "pointer" }}
-         >
-            <Box sx={{ 
-              width: "98%",
-              height: "60%",
-              background: "#fff",
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              borderRadius: "5px" }} >
-            {data.details.map((x, i) => <DataBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></DataBars>)}
-            </Box>
-          </SytledModal>} */}
       </BoxInfo>
     
   );
