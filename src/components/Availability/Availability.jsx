@@ -104,7 +104,7 @@ function Availability({ apps }) {
  
   return (
     <MainBox>
-      <Loading_Error />
+      {/* <Loading_Error /> */}
       {loading && <h1>loading...</h1>}
       {fiveMinsDataWithDates && fiveMinsDataWithDates.map((item, index) => {
         const toolTipData = item.dates[0]
