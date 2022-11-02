@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
 import { Typography, Box, Tooltip, Modal, styled } from "@mui/material";
 import { formatAvailabilityData, dataArrowsAndColors } from "./Data_Processor";
@@ -22,7 +22,7 @@ const lastTwoHours = "PST last 2 hours"
 function Availability({ apps }) {
  
   const [matchIndex, setMatchIndex] = React.useState(-1);
-  const [openModal, setOpenModal] = React.useState(false);
+ 
   const showDetails = (x) =>
     matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
   const [fiveMinsData, setFiveMinsData] = React.useState([]);
@@ -101,6 +101,31 @@ function Availability({ apps }) {
       denger: { color: "#DC0909", icon: <BiDownArrowAlt /> },
       warning: { color: "#FA9235", icon: <CgArrowsExchangeV /> }
   }
+
+
+const SytledModal = styled(Modal)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+});
+
+  const [newAveraveData, setNewAverageData] = useState([])
+  const [show, setShow] = useState(false)
+  const [openModal, setOpenModal] = React.useState();
+  // useEffect(()=>{
+   
+  //   setNewAverageData(fiveMinsDataWithDates.map(item => item.total_and_average))
+    
+    
+  // },[])
+  // console.log("newAveraveData:",newAveraveData)
+
+  const foo = (i) => {
+    setNewAverageData(i)
+    setShow(true)
+  }
+
+  // console.log("setOpenModal",newAveraveData)
  
   return (
     <MainBox>
@@ -113,20 +138,24 @@ function Availability({ apps }) {
         const unqiue = unqiueData.map(data => [... new Set(data)] )
         return (
           <DataCard key={index}  >
+            
             <Cards_Title data={item} />
            <Box bgcolor="#e2e2e2" sx={{width:"100%", padding: "3px 0", borderRadius: "5px"}} >
             <div style={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}} >
-              {item.total_and_average.filter(item => item.average.toString() != "NaN").map((item,idx) => {
+              {item.total_and_average.filter(innerItem => innerItem.average.toString() != "NaN").map((innerItem,idx) => {
+                
+              //  console.log("item.total_and_average",item.total_and_average)
                 return(
                   <div onClick={() =>  setOpenModal(true)} key={idx} >
-                    <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(item.average).color, textAlign: "center"}} >{item.average}%</Typography>
-                    <BoxFn >
-                      <ArrowBox bgcolor={dataArrowsAndColors(item.average).color} sx={{ textAlign: "center"}}>{dataArrowsAndColors(item.average).icon}</ArrowBox>
-                      <Typography sx={{ color: dataArrowsAndColors(item.average).color, textAlign: "center"}}></Typography>
+                    <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(innerItem.average).color, textAlign: "center"}} >{innerItem.average}%</Typography>
+                    <BoxFn onClick={()=> foo(innerItem.modalDates)} >
+                      <ArrowBox bgcolor={dataArrowsAndColors(innerItem.average).color} sx={{ textAlign: "center"}}>{dataArrowsAndColors(innerItem.average).icon}</ArrowBox>
+                      <Typography sx={{ color: dataArrowsAndColors(innerItem.average).color, textAlign: "center"}}></Typography>
                     </BoxFn>
                   </div>
                 ) 
               })}
+          
             </div>
             <div style={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}} >
                {unqiue.reverse().map(item => item.map((item,idx) => <p key={idx} >{item}</p> ))} 
@@ -138,7 +167,8 @@ function Availability({ apps }) {
               <div style={{display:"flex", justifyContent: "space-around", width:"100%"}} >
                {toolTipData.map((item,idx) => {
                return <div key={idx} >
-                  <Tooltip title={`${item.create_date.slice(0,10)}(${item.create_date.slice(11,19)})`} arrow>
+                  <Tooltip title={`${item.create_date.slice(0,19)}`} arrow>
+                  {/* <Tooltip title={`${item.create_date.slice(0,10)}(${item.create_date.slice(11,19)})`} arrow> */}
                   <DataBars/> 
                   </Tooltip>
                </div>
@@ -146,10 +176,42 @@ function Availability({ apps }) {
               </div>
             </div>
             </div> 
+            <>
+    </>
             <PopUpModal modalDates={modalDates} data={item} matchIndex={matchIndex} index={index} openModal={openModal} setOpenModal={setOpenModal} />
           </DataCard>
         );
       })}
+        {show &&  <SytledModal
+          open={openModal}
+          onClose={(e) => setOpenModal(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{ cursor: "pointer" }}
+          > 
+
+            {/* <Typography variant="h6" >last 5 hours availability</Typography> */}
+          <Box sx={{ 
+              width: "98%",
+              height: "60%",
+              background: "#fff",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+              flexWrap: "wrap",
+              padding: "0 20px",
+              borderRadius: "5px" }} >
+              {newAveraveData.slice(-120).map((a,i) => {
+                       
+              return <Box key={i} >
+                       <Tooltip title={`${a.slice(0,10)}(${a.slice(11,19)})`} arrow>
+                       <DataBars></DataBars> 
+                     </Tooltip>
+              </Box>
+              })}
+          </Box>
+ 
+        </SytledModal>}
     </MainBox>
   );
 }
