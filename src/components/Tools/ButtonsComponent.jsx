@@ -2,14 +2,29 @@ import * as React from "react";
 import { Box, Button, Stack, styled, Typography } from "@mui/material";
 import { Store, LocalShipping, Support, Storefront, Inventory, EmojiTransportation } from "@mui/icons-material";
 import { StyledStack, StyledButton, IconTyopgraphy } from "./styles"
+import FormComponent from "./FormComponent";
 
 const ButtonsComponent = () => {
+  const [matchIndex, setMatchIndex] = React.useState(-1)
+  const [showPillar, setShowPillar] = React.useState("")
+  const [show, setShow] = React.useState(false)
+  const foo = (i) => {
+    setShowPillar(i)
+    setShow(true)
+  }
+  const showDetails = (y,x) => {
+
+    matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
+    foo(y)
+  }
+   
   return (
     <Box sx={{ color: "#142A7C", width: "100%", margin: 0 }}>
       <StyledStack direction="row" spacing={2}>
         {pillars.map((pillar, idx) => {
+          // console.log("pillar",  matchIndex == idx && pillar.name)
           return (
-            <StyledButton key={idx} variant="outlined">
+            <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background:  matchIndex == idx && "white", color:  matchIndex == idx && "#001051"  }} key={idx} variant="outlined">
               <IconTyopgraphy>{pillar.icon}</IconTyopgraphy>
               <Typography fontSize={14}> {pillar.name}</Typography>
               <Typography sx={{ width: 25 }}></Typography>
@@ -17,6 +32,7 @@ const ButtonsComponent = () => {
           );
         })}
       </StyledStack>
+      <FormComponent showPillar={showPillar} show={show} /> 
     </Box>
   );
 };

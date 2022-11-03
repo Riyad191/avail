@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Modal, styled, Tooltip } from "@mui/material";
-import { DataBars } from "./styles";
+import { GreenBars } from "./styles";
 
 const SytledModal = styled(Modal)({
   display: "flex",
@@ -44,7 +44,7 @@ const PopUpModel = ({data, matchIndex, index, openModal, setOpenModal, modalDate
                     console.log("modal dates",modalDates)
             return <Box key={i} >
                      <Tooltip title={`${a.slice(0,10)}(${a.slice(11,19)})`} arrow>
-                     <DataBars></DataBars> 
+                     <GreenBars></GreenBars> 
                    </Tooltip>
             </Box>
             })}

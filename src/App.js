@@ -27,7 +27,7 @@ const App = () => {
         <Navbar />
         <Box sx={{ width: "100%", padding: "10px 10px 0"}}>
           <ButtonsComponent />
-          <FormComponent />
+          {/* <FormComponent /> */}
         </Box>
         <Routes>
           <Route exact path="/" element={<Availability />} />

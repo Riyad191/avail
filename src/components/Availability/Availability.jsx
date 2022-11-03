@@ -7,7 +7,8 @@ import {
   MainBox,
   DataCard,
   BoxFn,
-  DataBars
+  GreenBars,
+  GrayBars
 } from "./styles";
 import Card_Info from "./Card_Info";
 import Cards_Title from "./Card_Title";
@@ -15,9 +16,11 @@ import Loading_Error from "./Loading_Error";
 import axios from "axios";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CgArrowsExchangeV } from "react-icons/cg";
+import { IoIosRemove } from "react-icons/io";
+// import { IoIosRemove } from "react-icons/vs";
 import PopUpModal from "./PopUpModal"
 
-const lastTwoHours = "PST last 2 hours"
+const lastTwoHours = "last 2 hours of today - PST "
 
 function Availability({ apps }) {
  
@@ -27,7 +30,8 @@ function Availability({ apps }) {
     matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
   const [fiveMinsData, setFiveMinsData] = React.useState([]);
   const [fiveMinsDataWithDates, setFiveMinsDataWithDates] = React.useState([])
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(true)
+  const [lastFiveDays, setLastFiveDays] = useState([])
    
 
   const mainURl =
@@ -56,6 +60,8 @@ function Availability({ apps }) {
       nextDate.setDate(today.getDate() - index);
       return nextDate.toISOString().slice(0, 10);
     });
+    setLastFiveDays(recentFiveDays)
+    // console.log("lastFiveDays",lastFiveDays)
     const array = fiveMinsData.map((item) => item.glb_url);
     const result = Promise.allSettled(
       //will be fulfilled or rejected only when all of the inner promise is fulfilled or rejected
@@ -81,25 +87,36 @@ function Availability({ apps }) {
         const newFiveMinsData = [...fiveMinsData]
         res.forEach((item, index) => {
           newFiveMinsData[index] = {...newFiveMinsData[index]}
-          newFiveMinsData[index].dates = item.map((innerItem) =>
-            innerItem.data.slice(-24).map(({ create_date }) => ({ create_date })));
-           const modalDates = item.map((innerItem) => innerItem.data.map((a) => a.create_date));
+          // console.log("newFiveMinsData[index]",newFiveMinsData[index].app_name)
+          newFiveMinsData[index].dates = item.map((innerItem) => {
+            const arr = new Array(24).fill("No data")
+            const innerDate = innerItem.data.length == 0 ? arr.map((a,i) => { return {"create_date": innerItem.data[i] ?? a}} ) : innerItem.data.slice(-24).map(({ create_date }) => ({ create_date }));
+            // console.log("innerItem.data",innerDate)
+            return innerDate
+          })
+           
+          const modalAppName = newFiveMinsData[index].app_name
+          const modalDatesArr = new Array(288).fill("No data")
+           const modalDates = item.map((innerItem) => innerItem.data.length == 0 ? modalDatesArr.map((a,i) => { return  innerItem.data[i] ?? a } ) : innerItem.data.map((a) => a.create_date))
+          //  const modalDates = item.map((innerItem) => innerItem.data.map((a) => a.create_date))
+          //  console.log("modalDates",modalDates)
           newFiveMinsData[index].total_and_average = item.map((innerItem,idx) => {
-            const average = innerItem.data.reduce((acc,curr) => acc + curr.avail_percent,0) / innerItem.data.length
             const total = innerItem.data.reduce((acc,curr) => acc + curr.avail_percent,0)
-             return {"total": total, "average": average, "modalDates": modalDates[idx]}});
+            const average = total > 0 ? total / innerItem.data.length : 0;
+             return {"total": total, "average": average , "modalDates": modalDates[idx], "app_name": modalAppName}});
         });
         console.log("newFiveMinsData",newFiveMinsData)
         setFiveMinsDataWithDates(newFiveMinsData)
       });
     }, [fiveMinsData]);
 
-  const dataArrowsAndColors = v => +v >= 99 ? obj.success : obj.denger;
+  const dataArrowsAndColors = v => +v > 99.95 ? obj.success : +v < 99 && +v >= 1 ? obj.denger : +v < 1 ? obj.secondary : obj.warning;
 
     const obj = {
       success: { color: "#367600", icon: <BiUpArrowAlt /> },
       denger: { color: "#DC0909", icon: <BiDownArrowAlt /> },
-      warning: { color: "#FA9235", icon: <CgArrowsExchangeV /> }
+      warning: { color: "#EDDE27", icon: <CgArrowsExchangeV /> },
+      secondary: { color: "#787878", icon: <IoIosRemove /> }
   }
 
 
@@ -112,6 +129,7 @@ const SytledModal = styled(Modal)({
   const [newAveraveData, setNewAverageData] = useState([])
   const [show, setShow] = useState(false)
   const [openModal, setOpenModal] = React.useState();
+  const [modalAppNameVar, setModalAppNameVar] = React.useState("");
   // useEffect(()=>{
    
   //   setNewAverageData(fiveMinsDataWithDates.map(item => item.total_and_average))
@@ -120,8 +138,9 @@ const SytledModal = styled(Modal)({
   // },[])
   // console.log("newAveraveData:",newAveraveData)
 
-  const foo = (i) => {
+  const foo = (i,x) => {
     setNewAverageData(i)
+    setModalAppNameVar(x)
     setShow(true)
   }
 
@@ -142,23 +161,25 @@ const SytledModal = styled(Modal)({
             <Cards_Title data={item} />
            <Box bgcolor="#e2e2e2" sx={{width:"100%", padding: "3px 0", borderRadius: "5px"}} >
             <div style={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}} >
-              {item.total_and_average.filter(innerItem => innerItem.average.toString() != "NaN").map((innerItem,idx) => {
+              {item.total_and_average.reverse().map((innerItem,idx) => {
+              // {item.total_and_average.filter(innerItem => innerItem.average.toString() != "NaN").map((innerItem,idx) => {
                 
               //  console.log("item.total_and_average",item.total_and_average)
+               
                 return(
                   <div onClick={() =>  setOpenModal(true)} key={idx} >
                     <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(innerItem.average).color, textAlign: "center"}} >{innerItem.average}%</Typography>
-                    <BoxFn onClick={()=> foo(innerItem.modalDates)} >
+                    <BoxFn onClick={()=> { console.log("BoxFn:",innerItem); return foo(innerItem.modalDates, innerItem.app_name) } } >
                       <ArrowBox bgcolor={dataArrowsAndColors(innerItem.average).color} sx={{ textAlign: "center"}}>{dataArrowsAndColors(innerItem.average).icon}</ArrowBox>
                       <Typography sx={{ color: dataArrowsAndColors(innerItem.average).color, textAlign: "center"}}></Typography>
                     </BoxFn>
                   </div>
                 ) 
               })}
-          
             </div>
             <div style={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}} >
-               {unqiue.reverse().map(item => item.map((item,idx) => <p key={idx} >{item}</p> ))} 
+               {lastFiveDays.map((item,idx) => <p key={idx} >{item.slice(-5)}</p> ).reverse()} 
+               {/* {unqiue.reverse().map(item => item.map((item,idx) => <p key={idx} >{item}</p> ))}  */}
             </div>
             </Box>
             <div style={{display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}} >
@@ -169,7 +190,7 @@ const SytledModal = styled(Modal)({
                return <div key={idx} >
                   <Tooltip title={`${item.create_date.slice(0,19)}`} arrow>
                   {/* <Tooltip title={`${item.create_date.slice(0,10)}(${item.create_date.slice(11,19)})`} arrow> */}
-                  <DataBars/> 
+                 {item.create_date == "No data" ? <GrayBars/> : <GreenBars/>}  
                   </Tooltip>
                </div>
                })} 
@@ -193,7 +214,7 @@ const SytledModal = styled(Modal)({
             {/* <Typography variant="h6" >last 5 hours availability</Typography> */}
           <Box sx={{ 
               width: "98%",
-              height: "60%",
+              height: "20%",
               background: "#fff",
               display: "flex",
               justifyContent: "space-around",
@@ -201,12 +222,12 @@ const SytledModal = styled(Modal)({
               flexWrap: "wrap",
               padding: "0 20px",
               borderRadius: "5px" }} >
-              {newAveraveData.slice(-120).map((a,i) => {
-                       
+              {/* <h1>App Name: {modalAppNameVar}</h1> */}
+              {newAveraveData.slice(-160).map((item,i) => {        
               return <Box key={i} >
-                       <Tooltip title={`${a.slice(0,10)}(${a.slice(11,19)})`} arrow>
-                       <DataBars></DataBars> 
-                     </Tooltip>
+                <Tooltip title={`${item.slice(0,19)}`} arrow>
+                  {item == "No data" ? <GrayBars/> : <GreenBars/>} 
+                </Tooltip>
               </Box>
               })}
           </Box>

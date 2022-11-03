@@ -1,5 +1,5 @@
 import React from "react";
-import { BoxInfo, BoxPercentage, BoxInfoSection, DataBars, Uptime} from "./styles";
+import { BoxInfo, BoxPercentage, BoxInfoSection, GreenBars, Uptime} from "./styles";
 import { Typography, Box, Stack, styled, Modal } from "@mui/material";
 
 function Availablitiy_Info({ data, show, index, openModal, setOpenModal }) {
@@ -15,7 +15,7 @@ function Availablitiy_Info({ data, show, index, openModal, setOpenModal }) {
 
        <BoxInfo>
         <BoxInfoSection>
-          {data.details.map((x, i) => <DataBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></DataBars>)}
+          {data.details.map((x, i) => <GreenBars key={i} sx={{ background: +x !== 1 ? "#D12E3D" : "#187F0C"}}></GreenBars>)}
         </BoxInfoSection>
         <Uptime>{`${data.day}% uptime in last 24 hours`}</Uptime>
         <BoxPercentage>

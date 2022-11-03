@@ -13,7 +13,7 @@ export const formatAvailabilityData = (f) => {
 export const cardTitle = {
     appName: "App Name",
     serviceName: "Service Name",
-    flow: "Flow"
+    flowName: "Flow"
   }
 
 
