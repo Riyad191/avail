@@ -1,18 +1,12 @@
 import { combineReducers } from "redux";
 import * as actionTypes from "./actions";
 
-export function setOpenModal(openModal) {
-  return {
-    type: actionTypes.SHOW_MODAL,
-    payload: openModal,
-  };
-}
 
 const initialState = {
   data: [],
   loading: false,
   error: "",
-  openModal: false
+  
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,10 +21,16 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-const modalReducer = (state = initialState, action) => {
+const pillarsInitialState = {
+  pillarName: "",
+  appsNum: null
+}
+const pillarNameReducer = (state = pillarsInitialState , action) => {
   switch (action.type) {
-    case actionTypes.SHOW_MODAL:
-      return { ...state, openModal: action.payload };
+    case actionTypes.PILLAR_BUTTON:
+      return { ...state, pillarName: action.payload };
+    case actionTypes.APPS_QUANTITY:
+      return { ...state, appsNum: action.payload };
     default:
       return state;
   }
@@ -38,5 +38,5 @@ const modalReducer = (state = initialState, action) => {
 
 export default combineReducers({
   rootReducer: reducer,
-  modalReducer,
+  pillarNameReducer,
 });

@@ -3,8 +3,12 @@ import { Box, Button, Stack, styled, Typography } from "@mui/material";
 import { Store, LocalShipping, Support, Storefront, Inventory, EmojiTransportation } from "@mui/icons-material";
 import { StyledStack, StyledButton, IconTyopgraphy } from "./styles"
 import FormComponent from "./FormComponent";
+import { setPillarName } from "../../store/actionCreater";
+import { useSelector, useDispatch  } from "react-redux";
 
 const ButtonsComponent = () => {
+  const disptach = useDispatch()
+  const pillarName = useSelector(state => state.pillarNameReducer.pillarName)
   const [matchIndex, setMatchIndex] = React.useState(-1)
   const [showPillar, setShowPillar] = React.useState("")
   const [show, setShow] = React.useState(false)
@@ -13,16 +17,19 @@ const ButtonsComponent = () => {
     setShow(true)
   }
   const showDetails = (y,x) => {
-
     matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
     foo(y)
   }
-   
+  React.useEffect(()=>{
+    // console.log("showPillar",showPillar)
+    disptach(setPillarName(showPillar))
+    // console.log("pillarName",pillarName)
+  },[showPillar])
+  
   return (
     <Box sx={{ color: "#142A7C", width: "100%", margin: 0 }}>
       <StyledStack direction="row" spacing={2}>
         {pillars.map((pillar, idx) => {
-          // console.log("pillar",  matchIndex == idx && pillar.name)
           return (
             <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background:  matchIndex == idx && "white", color:  matchIndex == idx && "#001051"  }} key={idx} variant="outlined">
               <IconTyopgraphy>{pillar.icon}</IconTyopgraphy>

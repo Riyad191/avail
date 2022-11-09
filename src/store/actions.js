@@ -3,3 +3,6 @@ export const GET_USERS_SUCCESS = "GET_USERS_SUCCESS";
 export const GET_USERS_FAILED = "GET_USERS_FAILED";
 
 export const SHOW_MODAL = "SHOW_MODAL";
+export const PILLAR_BUTTON = "PILLAR_BUTTON";
+export const APPS_QUANTITY = "APPS_QUANTITY";
+
