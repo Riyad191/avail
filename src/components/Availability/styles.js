@@ -137,14 +137,13 @@ export const CardTitle = styled(Stack)(() => ({
 
 export const Element = styled(Box)(() => ({
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
   alignItems: "center",
-  flexDirection: "column",
-  width: "33%",
+  width: "100%",
 }));
 
 export const Title = styled(Box)(() => ({
-  margin: "5px 0",
+  margin: "5px 3px",
   width: "100%",
   textAlign: "center",
   background: "#e2e2e2",

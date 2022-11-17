@@ -1,23 +1,57 @@
 import * as React from "react";
-import { TextField, Box, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { TextField, Box, Typography, Autocomplete, styled } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { setFlowNameData, setAppNameData } from "../../store/actionCreater"
+ 
 
 const FormComponent = ({showPillar, show}) => {
+  const dispatch = useDispatch()
+  const cardTitleData = useSelector(state => state.pillarNameReducer.cardTitleData)
+  // console.log("cardTitleData",cardTitleData)
   const appsNum = useSelector(state => state.pillarNameReducer.appsNum)
-  console.log("apps number", appsNum)
+  const todaysAvailability = useSelector(state => state.pillarNameReducer.todaysAvailability)
+
+ const AvailbilityPercentageBox = styled(Box)(() => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    border: "solid #cecece 1px",
+    padding: "0 10px",
+    background: "#fff",
+    borderRadius: "5px",
+    width: "50%"
+  }));
+
   return (
     <>
-      <Box component="form" noValidate autoComplete="off" sx={{ width: "100%", display: "flex", alignItems: "center", padding: "9px 0", justifyContent: "space-between", borderRadius: 2 }}>
-        <Box>
-          <TextField sx={{ width: 260, mr: 3, bgcolor: "#FFF" }} id="outlined-basic" label="Search" placeholder="Search" variant="outlined" size="small"/>
-          <TextField sx={{ width: 260, mr: 3, bgcolor: "#FFF" }} id="outlined-basic" label="Search" placeholder="Search" variant="outlined" size="small"/>
-          <TextField sx={{ width: 260, mr: 3, bgcolor: "#FFF" }} id="outlined-basic" label="Search" placeholder="Search" variant="outlined" size="small"/>
+      <Box component="form" noValidate autoComplete="off" sx={{ width: "100%", display: "flex", alignItems: "center", padding: "9px 0", justifyContent: "space-between", borderRadius: 1 }}>
+        <Box sx={{ width: "50%", display: "flex", alignItems: "center", justifyContent: "flex-start" }} >
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={[...new Set(cardTitleData.map(a => a.app_name))]}
+            sx={{ marginRight: 1 , width: 300 }}
+            onChange={(e, newVal)=> dispatch(setAppNameData(newVal === null ? "" : newVal))}
+            renderInput={(params) => <TextField {...params} label="App Name" size="small" />}
+          />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={[...new Set(cardTitleData.map(a => a.service_name))]}
+            sx={{ width: 300 }}
+            onChange={(e, newVal)=> dispatch(setFlowNameData(newVal === null ? "" : newVal))}
+            renderInput={(params) => <TextField {...params} label="Service Name" size="small" />}
+          />
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-         <Typography variant="div" style={{ border: "solid 1px grey",  width: 200, height: 50, display: "flex", justifyContent: "center", alignItems: "center" }}> {`Applications: ${appsNum}`} </Typography>
+        <AvailbilityPercentageBox>
+          <Box sx={{   borderRadius: "3px", height: 40, width: "200px",  display: "flex", alignItems: "center",justifyContent: "center", color: todaysAvailability < 90 ? "red" : "green" }} >
+            <Typography> <span style={{color:"#4d4d4d"}} >Today's Availability:</span>  {todaysAvailability}% </Typography>
+          </Box>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+         <Typography variant="div" style={{ width: 160, height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Applications:</span>&nbsp;{appsNum} </Typography>
          &nbsp;&nbsp;&nbsp;&nbsp;
-         <Typography variant="div" style={{ border: "solid 1px grey",  width: 200, height: 50, display: "flex", justifyContent: "center", alignItems: "center" }}>{show ? <h3>{showPillar}</h3> : <h3>Transportation</h3> } </Typography>
-        </Box>
+         <Typography variant="div" style={{ height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Pillar:</span> &nbsp;{show ? <h4>{showPillar}</h4> : <h4>FULFILLMENT</h4> } </Typography>
+        </AvailbilityPercentageBox>
       </Box>
     </>
   );

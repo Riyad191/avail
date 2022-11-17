@@ -12,3 +12,27 @@ export function setAppsQuantity(appsQuantity) {
       payload: appsQuantity,
     };
   }
+export function setTodaysAvailability(todaysAvailability) {
+    return {
+      type: actionTypes.AVAILABILITY_OF_TODAY,
+      payload: todaysAvailability,
+    };
+  }
+export function setCardTitleData(cardTitleData) {
+    return {
+      type: actionTypes.CARD_TITLE,
+      payload: cardTitleData,
+    };
+  }
+export function setAppNameData(appNameData) {
+    return {
+      type: actionTypes.APP_NAME,
+      payload: appNameData
+    };
+  }
+export function setFlowNameData(flowNameData) {
+    return {
+      type: actionTypes.FLOW_NAME,
+      payload: flowNameData
+    };
+  }
