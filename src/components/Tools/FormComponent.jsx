@@ -19,7 +19,7 @@ const FormComponent = ({showPillar, show}) => {
     padding: "0 10px",
     background: "#fff",
     borderRadius: "5px",
-    width: "18%"
+    width: "20%"
   }));
 
   return (
