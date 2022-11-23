@@ -14,12 +14,12 @@ const FormComponent = ({showPillar, show}) => {
  const AvailbilityPercentageBox = styled(Box)(() => ({
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     border: "solid #cecece 1px",
     padding: "0 10px",
     background: "#fff",
     borderRadius: "5px",
-    width: "50%"
+    width: "18%"
   }));
 
   return (
@@ -44,6 +44,11 @@ const FormComponent = ({showPillar, show}) => {
           />
         </Box>
         <AvailbilityPercentageBox>
+          <Box sx={{   borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center", color: todaysAvailability < 90 ? "red" : "green" }} >
+            <Typography> <span style={{color:"#4d4d4d"}} >Overall Availability:</span>  {todaysAvailability}%  <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span> </Typography>
+          </Box>
+        </AvailbilityPercentageBox>
+        {/* <AvailbilityPercentageBox>
           <Box sx={{   borderRadius: "3px", height: 40, width: "200px",  display: "flex", alignItems: "center",justifyContent: "center", color: todaysAvailability < 90 ? "red" : "green" }} >
             <Typography> <span style={{color:"#4d4d4d"}} >Today's Availability:</span>  {todaysAvailability}% </Typography>
           </Box>
@@ -51,7 +56,7 @@ const FormComponent = ({showPillar, show}) => {
          <Typography variant="div" style={{ width: 160, height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Applications:</span>&nbsp;{appsNum} </Typography>
          &nbsp;&nbsp;&nbsp;&nbsp;
          <Typography variant="div" style={{ height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Pillar:</span> &nbsp;{show ? <h4>{showPillar}</h4> : <h4>FULFILLMENT</h4> } </Typography>
-        </AvailbilityPercentageBox>
+        </AvailbilityPercentageBox> */}
       </Box>
     </>
   );
