@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Typography, Box, Tooltip, Modal, Stack, styled } from "@mui/material";
+import { Typography, Box, Tooltip, Modal, Stack, styled, CircularProgress } from "@mui/material";
 import { ArrowBox, MainBox, DataCard, BoxFn, GreenBars, GrayBars } from "./styles";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CgArrowsExchangeV } from "react-icons/cg";
@@ -171,8 +171,8 @@ function Availability() {
   return (
     <MainBox>
       {/* <Loading_Error /> */}
-      {loading ? <h1 style={{color: "red", marginTop:240, fontSize: 50}} >loading...</h1>  : 
-       fiveMinsData.length == 0 ? <h1 style={{color: "red", marginTop:240, fontSize: 50}} >No data found</h1> : searchFn(fiveMinsDataWithDates)?.map((item, index) => {
+      {loading ?   <Box sx={{ fontSize: 40, marginTop: 35, color: "blue" }}><CircularProgress /></Box>  : 
+       fiveMinsData.length == 0 ? <h1 style={{color: "red", marginTop:260 }} >No data found</h1> : searchFn(fiveMinsDataWithDates)?.map((item, index) => {
           // const toolTipData = item.dates[0]
           const toolTipData = item.total_and_average[0].modalDates.slice(0, 24);
           const modalDates = item.modalDates;
