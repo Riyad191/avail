@@ -40,9 +40,11 @@ function Availability() {
   const appsNum = useSelector((state) => state.pillarNameReducer.appsNum);
   const searchAppName = useSelector((state) => state.pillarNameReducer.filterAppName);
   const searchFlowName = useSelector((state) => state.pillarNameReducer.filterFlowName);
-  const pillarNameParam = !pillarName ? "FULFILLMENT" : pillarName.toUpperCase();
+  const pillarNameParam = !pillarName ? "TRANSPORTATION" : pillarName.toUpperCase();
 
+ 
   const mainURl = `https://oscs-sre-api.dev.walmart.com/availability/get/app-list?tier=1&&platfom=WCNP&pillar=${pillarNameParam}`;
+
 
   const fetchApi = async () => {
     try {
@@ -50,16 +52,21 @@ function Availability() {
       setFiveMinsData([]);
       const res = await axios(mainURl);
       const data = await res.data;
+      console.log("DATA",data)
+       
+      
       setFiveMinsData(data);
+      
       setLoading(false);
     } catch (err) {
       console.error(err.message);
     }
   };
 
-  useEffect(() => { fetchApi() }, [pillarName]);
+  useEffect(() => { fetchApi() }, [mainURl]);
 
   useEffect(() => {
+    setFiveMinsDataWithDates([])
     const today = new Date();
     const recentFiveDays = new Array(5).fill().map((_, index) => {
       const nextDate = new Date();
@@ -123,8 +130,8 @@ function Availability() {
         });
       });
     // console.log("newFiveMinsData", fiveMinsDataWithDates);
-    dispatch(setAppsQuantity(fiveMinsData.length == 0 ? "loading..." : fiveMinsData.length));
-  }, [fiveMinsData]);
+    dispatch(setAppsQuantity(fiveMinsData.length == 0 ? "0" : fiveMinsData.length));
+  }, [fiveMinsData, mainURl]);
 
   useEffect(() => {
     const countAvailabilityOfToday = fiveMinsDataWithDates.map((a) => a.availability_of_today);
@@ -164,8 +171,8 @@ function Availability() {
   return (
     <MainBox>
       {/* <Loading_Error /> */}
-      {loading ? <h1>loading...</h1>  : 
-        searchFn(fiveMinsDataWithDates)?.map((item, index) => {
+      {loading ? <h1 style={{color: "red", marginTop:240, fontSize: 50}} >loading...</h1>  : 
+       fiveMinsData.length == 0 ? <h1 style={{color: "red", marginTop:240, fontSize: 50}} >No data found</h1> : searchFn(fiveMinsDataWithDates)?.map((item, index) => {
           // const toolTipData = item.dates[0]
           const toolTipData = item.total_and_average[0].modalDates.slice(0, 24);
           const modalDates = item.modalDates;

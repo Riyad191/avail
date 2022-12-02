@@ -45,11 +45,11 @@ const ButtonsComponent = () => {
 };
 
 const pillars = [
+  { name: "Transportation", icon: <EmojiTransportation /> },
   { name: "Fulfillment", icon: <LocalShipping /> },
   { name: "Support", icon: <Support /> },
   { name: "Markectplace", icon: <Storefront /> },
   { name: "Item & Inventory", icon: <Inventory /> },
-  { name: "Transportation", icon: <EmojiTransportation /> },
   { name: "Stores & Associates", icon: <Store /> },
   ,
 ];
