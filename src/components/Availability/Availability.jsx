@@ -53,11 +53,8 @@ function Availability() {
       const res = await axios(mainURl);
       const data = await res.data;
       console.log("DATA",data)
-       
-      
       setFiveMinsData(data);
-      
-      setLoading(false);
+     
     } catch (err) {
       console.error(err.message);
     }
@@ -66,7 +63,7 @@ function Availability() {
   useEffect(() => { fetchApi() }, [mainURl]);
 
   useEffect(() => {
-    setFiveMinsDataWithDates([])
+    // setFiveMinsData([])
     const today = new Date();
     const recentFiveDays = new Array(5).fill().map((_, index) => {
       const nextDate = new Date();
@@ -126,6 +123,7 @@ function Availability() {
             }
           );
           newFiveMinsData[index].availability_of_today = avail_of_today[0];
+          setLoading(false);
           setFiveMinsDataWithDates(newFiveMinsData);
         });
       });
@@ -136,7 +134,9 @@ function Availability() {
   useEffect(() => {
     const countAvailabilityOfToday = fiveMinsDataWithDates.map((a) => a.availability_of_today);
     const availabilityOfTodayPercentage = countAvailabilityOfToday.reduce((acc, curr) => acc + curr, 0) / fiveMinsDataWithDates.length;
-    dispatch(setTodaysAvailability(availabilityOfTodayPercentage));
+    // console.log(availabilityOfTodayPercentage)
+    const availPercent = fiveMinsData.length == 0 ? "0" : availabilityOfTodayPercentage
+    dispatch(setTodaysAvailability(availPercent));
   }, [fiveMinsDataWithDates]);
 
   const dataArrowsAndColors = (v) => +v > 99.95 ? obj.success : +v < 99 && +v >= 1 ? obj.denger : +v < 1 ? obj.secondary : obj.warning;

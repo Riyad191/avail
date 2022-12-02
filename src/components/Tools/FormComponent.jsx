@@ -44,8 +44,10 @@ const FormComponent = ({showPillar, show}) => {
           />
         </Box>
         <AvailbilityPercentageBox>
-          <Box sx={{   borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center", color: todaysAvailability < 90 ? "red" : "green" }} >
-            <Typography> <span style={{color:"#4d4d4d"}} >Overall Availability:</span>  {typeof(todaysAvailability) === "number" ? `${todaysAvailability.toPrecision(3)}%` : "0"} <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span> </Typography>
+          <Box sx={{   borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center", 
+          // color: todaysAvailability < 90 ? "red" : "green"
+          }} >
+            <Typography> <span style={{color:"#4d4d4d"}} >Overall Availability:</span>  {typeof(todaysAvailability) === "number" ? `${todaysAvailability.toPrecision(3)}%` : "0%"} <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span> </Typography>
           </Box>
         </AvailbilityPercentageBox>
         {/* <AvailbilityPercentageBox>
