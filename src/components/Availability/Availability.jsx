@@ -34,6 +34,7 @@ function Availability() {
   const [modalFlowNameVar, setModalFlowNameVar] = React.useState("");
   const [modalBoxPercentage, setModalBoxPercentage] = React.useState("");
   const [fiveMinsDataWithDates, setFiveMinsDataWithDates] = React.useState([]);
+  const [noDataFound, setNoDataFound] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [lastFiveDays, setLastFiveDays] = useState([]);
   const pillarName = useSelector((state) => state.pillarNameReducer.pillarName);
@@ -43,27 +44,33 @@ function Availability() {
   const pillarNameParam = !pillarName ? "TRANSPORTATION" : pillarName.toUpperCase();
 
  
+  useEffect(()=>{ setFiveMinsData([]); setNoDataFound([])},[pillarName,pillarNameParam])
+  // const mainURl = `https://oscs-sre-api.dev.walmart.com/availability/get/app-list?tier=1&&platfom=WCNP&pillar=${pillarName.toUpperCase()}`;
+  // console.log("pillar name", pillarName)
   const mainURl = `https://oscs-sre-api.dev.walmart.com/availability/get/app-list?tier=1&&platfom=WCNP&pillar=${pillarNameParam}`;
-
-
+   console.log("Main URL", mainURl)
+   
   const fetchApi = async () => {
     try {
       setLoading(true);
-      setFiveMinsData([]);
       const res = await axios(mainURl);
       const data = await res.data;
-      console.log("DATA",data)
-      setFiveMinsData(data);
-     
+      // console.log("DATA",data)
+      // setFiveMinsData(data)
+   
+     data.length != 0 ? setFiveMinsData(data) : setNoDataFound(null)
     } catch (err) {
       console.error(err.message);
     }
   };
+  console.log("FMD",fiveMinsData)
+
 
   useEffect(() => { fetchApi() }, [mainURl]);
 
+  // useEffect(()=>{setFiveMinsDataWithDates([])},[])
+
   useEffect(() => {
-    // setFiveMinsData([])
     const today = new Date();
     const recentFiveDays = new Array(5).fill().map((_, index) => {
       const nextDate = new Date();
@@ -77,18 +84,20 @@ function Availability() {
       array.map((param) => {
         return Promise.allSettled(
           recentFiveDays.map((date) => {
-            return axios
+            if(fiveMinsData.length != 0 ){
+              return axios
               .get(
                 `https://oscs-sre-api.dev.walmart.com/availability/detailed_avail_percent?glb_url=${param}&&date_frequency=5mins&&create_date=${date}`
-              )
-              .then((res) => {
-                return res;
-              });
+                )
+                .then((res) => {
+                  console.log("calls",res)
+                  return res;
+                });
+            }  
           })
         );
       })
-    );
-
+    )
     result
       .then((res) =>
         res.map((item) =>
@@ -129,7 +138,7 @@ function Availability() {
       });
     // console.log("newFiveMinsData", fiveMinsDataWithDates);
     dispatch(setAppsQuantity(fiveMinsData.length == 0 ? "0" : fiveMinsData.length));
-  }, [fiveMinsData, mainURl]);
+  }, [fiveMinsData]);
 
   useEffect(() => {
     const countAvailabilityOfToday = fiveMinsDataWithDates.map((a) => a.availability_of_today);
@@ -168,11 +177,18 @@ function Availability() {
 
   // console.log("searchFn",searchFn(fiveMinsDataWithDates));
   console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
+
+    console.log("noDatafound",noDataFound)
+    if(noDataFound == null){
+      return   <MainBox><h1 style={{color: "grey", marginTop:260 }} >No data found</h1></MainBox> 
+     }
   return (
     <MainBox>
+      
       {/* <Loading_Error /> */}
       {loading ?   <Box sx={{ fontSize: 40, marginTop: 35, color: "blue" }}><CircularProgress /></Box>  : 
-       fiveMinsData.length == 0 ? <h1 style={{color: "red", marginTop:260 }} >No data found</h1> : searchFn(fiveMinsDataWithDates)?.map((item, index) => {
+      //  fiveMinsDataWithDates.length == 0 ? <h1 style={{color: "red", marginTop:260 }} >No data found</h1> : 
+       searchFn(fiveMinsDataWithDates)?.map((item, index) => {
           // const toolTipData = item.dates[0]
           const toolTipData = item.total_and_average[0].modalDates.slice(0, 24);
           const modalDates = item.modalDates;
@@ -248,7 +264,7 @@ function Availability() {
                   </Box>
                  </Box>
                </SytledModal>
-               )} 
+                )}  
     </MainBox>
   );
 }

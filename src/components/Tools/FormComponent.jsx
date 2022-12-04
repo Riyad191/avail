@@ -2,6 +2,7 @@ import * as React from "react";
 import { TextField, Box, Typography, Autocomplete, styled } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setFlowNameData, setAppNameData } from "../../store/actionCreater"
+import { Tooltip } from "@mui/material";
  
 
 const FormComponent = ({showPillar, show}) => {
@@ -47,7 +48,10 @@ const FormComponent = ({showPillar, show}) => {
           <Box sx={{   borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center", 
           // color: todaysAvailability < 90 ? "red" : "green"
           }} >
-            <Typography> <span style={{color:"#4d4d4d"}} >Overall Availability:</span>  {typeof(todaysAvailability) === "number" ? `${todaysAvailability.toPrecision(3)}%` : "0%"} <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span> </Typography>
+             <Typography>
+                <Tooltip title="Today's Availability" placement="top" followCursor><span style={{color:"#4d4d4d"}} >Overall Availability:</span></Tooltip>
+                {typeof(todaysAvailability) === "number" ? `${todaysAvailability.toPrecision(3)}%` : "0%"} <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span>
+             </Typography>
           </Box>
         </AvailbilityPercentageBox>
         {/* <AvailbilityPercentageBox>
