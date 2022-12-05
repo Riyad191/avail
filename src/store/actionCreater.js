@@ -36,3 +36,9 @@ export function setFlowNameData(flowNameData) {
       payload: flowNameData
     };
   }
+export function setMainData(mainData) {
+    return {
+      type: actionTypes.MAIN_DATA,
+      payload: mainData
+    };
+  }

@@ -4,7 +4,7 @@ import { ArrowBox, MainBox, DataCard, BoxFn, GreenBars, GrayBars } from "./style
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CgArrowsExchangeV } from "react-icons/cg";
 import { IoIosRemove } from "react-icons/io";
-import { setAppsQuantity, setTodaysAvailability, setCardTitleData } from "../../store/actionCreater";
+import { setAppsQuantity, setTodaysAvailability, setCardTitleData, setMainData } from "../../store/actionCreater";
 import Cards_Title from "./Card_Title";
 import Loading_Error from "./Loading_Error";
 import PopUpModal from "./PopUpModal";
@@ -57,18 +57,18 @@ function Availability() {
       const data = await res.data;
       // console.log("DATA",data)
       // setFiveMinsData(data)
-   
-     data.length != 0 ? setFiveMinsData(data) : setNoDataFound(null)
+      
+      data.length != 0 ? setFiveMinsData(data) : setNoDataFound(null)
     } catch (err) {
       console.error(err.message);
+      setLoading(false);
     }
   };
   console.log("FMD",fiveMinsData)
 
+  useEffect(()=>{dispatch(setMainData(fiveMinsData))},[fiveMinsData])
 
   useEffect(() => { fetchApi() }, [mainURl]);
-
-  // useEffect(()=>{setFiveMinsDataWithDates([])},[])
 
   useEffect(() => {
     const today = new Date();
@@ -173,10 +173,9 @@ function Availability() {
 
    const searchFn = (rows) => rows.filter((row) => row.app_name.indexOf(searchAppName) > -1).filter((row) => row.service_name.indexOf(searchFlowName) > -1);
 
-  useEffect(()=>{dispatch(setCardTitleData(searchFn(fiveMinsDataWithDates)))})
+   useEffect(()=>{dispatch(setCardTitleData(searchFn(fiveMinsDataWithDates)))})
 
-  // console.log("searchFn",searchFn(fiveMinsDataWithDates));
-  console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
+   console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
 
     console.log("noDatafound",noDataFound)
     if(noDataFound == null){
@@ -184,7 +183,6 @@ function Availability() {
      }
   return (
     <MainBox>
-      
       {/* <Loading_Error /> */}
       {loading ?   <Box sx={{ fontSize: 40, marginTop: 35, color: "blue" }}><CircularProgress /></Box>  : 
       //  fiveMinsDataWithDates.length == 0 ? <h1 style={{color: "red", marginTop:260 }} >No data found</h1> : 
@@ -251,7 +249,7 @@ function Availability() {
                   <Box/>
                   <br/>
                   <Box sx={{ width: "100%",   display: "flex",justifyContent: "space-around", alignItems: "center", flexWrap: "wrap" }}>
-                       {newAveraveData.slice(0, 140).map((item, i) => {
+                       {newAveraveData.slice(0,140).map((item, i) => {
                         //  console.log("newAveraveData",newAveraveData)
                           return (
                             <Box key={i}>

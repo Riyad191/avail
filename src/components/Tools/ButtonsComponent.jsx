@@ -4,6 +4,7 @@ import { Store, LocalShipping, Support, Storefront, Inventory, EmojiTransportati
 import { StyledStack, StyledButton, IconTyopgraphy } from "./styles"
 import FormComponent from "./FormComponent";
 import { setPillarName } from "../../store/actionCreater";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch  } from "react-redux";
 
 const ButtonsComponent = () => {
@@ -31,12 +32,14 @@ const ButtonsComponent = () => {
         {pillars.map((pillar, idx) => {
           //  console.log("pillar---Name",pillar.name)
           return (
+            <Link to={`/availability/${pillar.name}`} >
              <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background: pillar.name == pillarName && "#fff", color: pillar.name == pillarName && "#001051" }} key={idx} variant="outlined"> 
              {/* <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background:  matchIndex == idx && "white", color:  matchIndex == idx && "#001051"  }} key={idx} variant="outlined">  */}
               <IconTyopgraphy>{pillar.icon}</IconTyopgraphy>
               <Typography fontSize={14}> {pillar.name}</Typography>
               <Typography sx={{ width: 25 }}></Typography>
             </StyledButton>
+            </Link>
           );
         })}
       </StyledStack>

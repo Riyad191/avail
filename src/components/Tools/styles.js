@@ -3,7 +3,7 @@ import { Button, Stack, styled, Typography } from "@mui/material";
 
 export const StyledButton = styled(Button)({
     height: 50,
-    width: "16%",
+    width: "240px",
     color: "#FFF",
     border: "solid 1px rgb(23, 27, 72)",
     background: "rgb(23, 27, 72)",

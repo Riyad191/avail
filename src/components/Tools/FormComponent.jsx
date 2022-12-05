@@ -8,6 +8,7 @@ import { Tooltip } from "@mui/material";
 const FormComponent = ({showPillar, show}) => {
   const dispatch = useDispatch()
   const cardTitleData = useSelector(state => state.pillarNameReducer.cardTitleData)
+  const mainData = useSelector(state => state.pillarNameReducer.mainData)
   // console.log("cardTitleData",cardTitleData)
   const appsNum = useSelector(state => state.pillarNameReducer.appsNum)
   const todaysAvailability = useSelector(state => state.pillarNameReducer.todaysAvailability)
@@ -30,7 +31,7 @@ const FormComponent = ({showPillar, show}) => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={[...new Set(cardTitleData.map(a => a.app_name))]}
+            options={mainData.length == 0 ? ["No Applications"].map(a => a) : [...new Set(cardTitleData.map(a => a.app_name))]}
             sx={{ marginRight: 1 , width: 300 }}
             onChange={(e, newVal)=> dispatch(setAppNameData(newVal === null ? "" : newVal))}
             renderInput={(params) => <TextField {...params} label="App Name" size="small" />}
@@ -38,7 +39,7 @@ const FormComponent = ({showPillar, show}) => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={[...new Set(cardTitleData.map(a => a.service_name))]}
+            options={mainData.length == 0 ? ["No Services"].map(a => a) :  [...new Set(cardTitleData.map(a => a.service_name))]}
             sx={{ width: 300 }}
             onChange={(e, newVal)=> dispatch(setFlowNameData(newVal === null ? "" : newVal))}
             renderInput={(params) => <TextField {...params} label="Service Name" size="small" />}

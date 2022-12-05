@@ -9,4 +9,5 @@ export const CARD_TITLE = "CARD_TITLE";
 export const APP_NAME = "APP_NAME";
 export const FLOW_NAME = "FLOW_NAME";
 export const AVAILABILITY_OF_TODAY = "AVAILABILITY_OF_TODAY";
+export const MAIN_DATA = "MAIN_DATA";
 
