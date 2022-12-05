@@ -4,10 +4,11 @@ import { Store, LocalShipping, Support, Storefront, Inventory, EmojiTransportati
 import { StyledStack, StyledButton, IconTyopgraphy } from "./styles"
 import FormComponent from "./FormComponent";
 import { setPillarName } from "../../store/actionCreater";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch  } from "react-redux";
 
 const ButtonsComponent = () => {
+  const navigate = useNavigate()
   const disptach = useDispatch()
   const pillarName = useSelector(state => state.pillarNameReducer.pillarName)
   const [matchIndex, setMatchIndex] = React.useState(-1)
@@ -21,11 +22,14 @@ const ButtonsComponent = () => {
     // matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
     foo(y)
   }
+
+  React.useEffect(()=>{ navigate('/availability/Transportation') },[])
+ 
   React.useEffect(()=>{
     // console.log("showPillar",showPillar)
     disptach(setPillarName(showPillar))
   },[showPillar])
-  console.log("pillarName",pillarName)
+  console.log("pillar----Name",pillarName)
   return (
     <Box sx={{ color: "#142A7C", width: "100%", margin: 0 }}>
       <StyledStack direction="row" spacing={2}>
