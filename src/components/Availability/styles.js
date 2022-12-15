@@ -22,14 +22,35 @@ export const MainBox = styled(Box)(() => ({
   color: "#636363",
 }));
 
-export const GreenBars = styled(Box)(() => ({
+export const AvailTypes = styled(Box)(({ color }) => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "green"
+  background: color
 }));
 
-export const GrayBars = styled(Box)(() => ({
+export const Success = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#367600"
+}));
+
+export const Denger = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#DC0909"
+}));
+
+export const Warning = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#dfaf2d"
+}));
+
+export const Secondary = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
@@ -87,6 +108,21 @@ export const BoxInfo = styled(Box)(() => ({
   flexDirection: "column",
   width: "100%",
 }));
+
+export const PopUpButton = styled(Box)({
+  color: "#FFF",
+  background: "#010377",
+  display: "flex",
+  padding: "2px",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderRadius: "5px",
+  fontSize:20,
+  "&:hover": {
+    background: "#cacaca",
+    color: "#010377",
+  },
+});
 
 export const BoxPercentage = styled(Box)(() => ({
   display: "flex",

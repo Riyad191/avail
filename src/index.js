@@ -25,7 +25,7 @@ const middleware = [ sagaMiddleware,
  ];
 
 // store
-var store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(...middleware)));
 
 // run saga
 sagaMiddleware.run(rootSaga);

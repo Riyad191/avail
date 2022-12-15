@@ -24,11 +24,13 @@ const reducer = (state = initialState, action) => {
 const pillarsInitialState = {
   pillarName: "",
   appsNum: null,
-  todaysAvailability: null,
+  todaysAvailability: 0,
   cardTitleData: [],
   filterAppName: "",
   filterFlowName: "",
+  availabilityDate: "",
   mainData: [],
+  barsData: null,
 }
 const pillarNameReducer = (state = pillarsInitialState , action) => {
   switch (action.type) {
@@ -46,6 +48,10 @@ const pillarNameReducer = (state = pillarsInitialState , action) => {
       return { ...state, filterFlowName: action.payload };
     case actionTypes.MAIN_DATA:
       return { ...state, mainData: action.payload };
+    case actionTypes.BARS_DATA:
+      return { ...state, barsData: action.payload };
+    case actionTypes.AVAILABILITY_DATE:
+      return { ...state, availabilityDate: action.payload };
     default:
       return state;
   }

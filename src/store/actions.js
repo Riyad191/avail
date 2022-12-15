@@ -10,4 +10,6 @@ export const APP_NAME = "APP_NAME";
 export const FLOW_NAME = "FLOW_NAME";
 export const AVAILABILITY_OF_TODAY = "AVAILABILITY_OF_TODAY";
 export const MAIN_DATA = "MAIN_DATA";
+export const BARS_DATA = "BARS_DATA";
+export const AVAILABILITY_DATE = "AVAILABILITY_DATE";
 

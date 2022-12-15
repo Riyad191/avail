@@ -8,7 +8,7 @@ import { StyledToolbar, NavToolbar, NavAppbar, LogoStack } from "./styles";
 
 const Navebar = () => {
   const pillarName = useSelector((state) => state.pillarNameReducer.pillarName);
-  console.log("nav pillar",pillarName)
+  // console.log("nav pillar",pillarName)
   return (
     <NavAppbar position="sticky">
       <StyledToolbar>

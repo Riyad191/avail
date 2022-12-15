@@ -1,15 +1,14 @@
 import * as React from "react";
 import { TextField, Box, Typography, Autocomplete, styled } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlowNameData, setAppNameData } from "../../store/actionCreater"
+import { setFlowNameData, setAppNameData, seAvailabilityDate } from "../../store/actionCreater"
 import { Tooltip } from "@mui/material";
  
 
-const FormComponent = ({showPillar, show}) => {
+const FormComponent = () => {
   const dispatch = useDispatch()
   const cardTitleData = useSelector(state => state.pillarNameReducer.cardTitleData)
   const mainData = useSelector(state => state.pillarNameReducer.mainData)
-  // console.log("cardTitleData",cardTitleData)
   const appsNum = useSelector(state => state.pillarNameReducer.appsNum)
   const todaysAvailability = useSelector(state => state.pillarNameReducer.todaysAvailability)
 
@@ -40,30 +39,20 @@ const FormComponent = ({showPillar, show}) => {
             disablePortal
             id="combo-box-demo"
             options={mainData.length == 0 ? ["No Services"].map(a => a) :  [...new Set(cardTitleData.map(a => a.service_name))]}
-            sx={{ width: 300 }}
+            sx={{ marginRight: 1 , width: 300 }}
             onChange={(e, newVal)=> dispatch(setFlowNameData(newVal === null ? "" : newVal))}
             renderInput={(params) => <TextField {...params} label="Service Name" size="small" />}
           />
+          <TextField onChange={(e)=> dispatch(seAvailabilityDate(e.target.value))} id="outlined-basic"  variant="outlined" size="small" type="date"  sx={{ width: 300 }} />
         </Box>
         <AvailbilityPercentageBox>
-          <Box sx={{   borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center", 
-          // color: todaysAvailability < 90 ? "red" : "green"
-          }} >
+          <Box sx={{ borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center"  }} >
              <Typography>
                 <Tooltip title="Today's Availability" placement="top" followCursor><span style={{color:"#4d4d4d"}} >Overall Availability:</span></Tooltip>
-                {typeof(todaysAvailability) === "number" ? `${todaysAvailability.toPrecision(3)}%` : "0%"} <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span>
+                &nbsp; { todaysAvailability > 1 ? `${todaysAvailability.toPrecision(3)}` : "0.00"}% &nbsp;  <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span>
              </Typography>
           </Box>
         </AvailbilityPercentageBox>
-        {/* <AvailbilityPercentageBox>
-          <Box sx={{   borderRadius: "3px", height: 40, width: "200px",  display: "flex", alignItems: "center",justifyContent: "center", color: todaysAvailability < 90 ? "red" : "green" }} >
-            <Typography> <span style={{color:"#4d4d4d"}} >Today's Availability:</span>  {todaysAvailability}% </Typography>
-          </Box>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-         <Typography variant="div" style={{ width: 160, height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Applications:</span>&nbsp;{appsNum} </Typography>
-         &nbsp;&nbsp;&nbsp;&nbsp;
-         <Typography variant="div" style={{ height: 40, display: "flex", justifyContent: "center", alignItems: "center" }}> <span style={{color:"#4d4d4d"}}  >Pillar:</span> &nbsp;{show ? <h4>{showPillar}</h4> : <h4>FULFILLMENT</h4> } </Typography>
-        </AvailbilityPercentageBox> */}
       </Box>
     </>
   );

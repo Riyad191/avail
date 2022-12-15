@@ -11,34 +11,28 @@ const ButtonsComponent = () => {
   const navigate = useNavigate()
   const disptach = useDispatch()
   const pillarName = useSelector(state => state.pillarNameReducer.pillarName)
-  const [matchIndex, setMatchIndex] = React.useState(-1)
   const [showPillar, setShowPillar] = React.useState("Transportation")
   const [show, setShow] = React.useState(false)
   const foo = (i) => {
     setShowPillar(i)
     setShow(true)
   }
-  const showDetails = (y,x) => {
-    // matchIndex == x ? setMatchIndex(-1) : setMatchIndex(x);
+  const showDetails = (y) => {
     foo(y)
   }
 
   React.useEffect(()=>{ navigate('/availability/Transportation') },[])
  
   React.useEffect(()=>{
-    // console.log("showPillar",showPillar)
     disptach(setPillarName(showPillar))
   },[showPillar])
-  console.log("pillar----Name",pillarName)
   return (
     <Box sx={{ color: "#142A7C", width: "100%", margin: 0 }}>
       <StyledStack direction="row" spacing={2}>
         {pillars.map((pillar, idx) => {
-          //  console.log("pillar---Name",pillar.name)
           return (
-            <Link to={`/availability/${pillar.name}`} >
+            <Link key={idx} to={`/availability/${pillar.name}`} >
              <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background: pillar.name == pillarName && "#fff", color: pillar.name == pillarName && "#001051" }} key={idx} variant="outlined"> 
-             {/* <StyledButton onClick={()=> showDetails(pillar.name,idx)} style={{ background:  matchIndex == idx && "white", color:  matchIndex == idx && "#001051"  }} key={idx} variant="outlined">  */}
               <IconTyopgraphy>{pillar.icon}</IconTyopgraphy>
               <Typography fontSize={14}> {pillar.name}</Typography>
               <Typography sx={{ width: 25 }}></Typography>

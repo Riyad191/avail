@@ -42,3 +42,15 @@ export function setMainData(mainData) {
       payload: mainData
     };
   }
+export function setBarsData(barsData) {
+    return {
+      type: actionTypes.BARS_DATA,
+      payload: barsData
+    };
+  }
+export function seAvailabilityDate(availabilityData) {
+    return {
+      type: actionTypes.AVAILABILITY_DATE,
+      payload: availabilityData
+    };
+  }
