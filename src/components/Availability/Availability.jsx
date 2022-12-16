@@ -10,7 +10,7 @@ import "./styles.css";
 import Dates_Buttons from "./Dates_Buttons";
 import Dates_Data from "./Dates_Data";
 import { dataArrowsAndColors, getStateData } from "./Services"
-import { replace } from "lodash";
+
 
 function Availability() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function Availability() {
   const pillarNameParam = !pillarName ? "TRANSPORTATION" : pillarName.toUpperCase();
  
 
-
+  const noDataAvailableMessage = "No data found";
   const source = axios.CancelToken.source();
   useEffect(() => {
     getStateData()
@@ -42,10 +42,12 @@ function Availability() {
     setFiveMinsDataWithDates([]);
     const today = !availabilityDate ? new Date() : new Date(availabilityDate);
     const recentFiveDays = new Array(5).fill().map((_, index) => {
-      const nextDate = new Date() 
+      const nextDate = new Date();
+      // const nextDate = !availabilityDate ? new Date() : new Date(availabilityDate);
       nextDate.setDate(today.getDate() - index);
       const newFormat = nextDate.toLocaleDateString();
-      // console.log("new format", newFormat)
+      console.log("new format", newFormat)
+      // console.log("index", index)
       // console.log("ddd",`${newFormat.slice(6,10)}-${newFormat.slice(0,2)}-${newFormat.slice(3,5)}`)
       // return `${newFormat.slice(6,10)}-${newFormat.slice(0,2)}-${newFormat.slice(3,5)}`;
       return nextDate.toISOString().slice(0, 10);
@@ -97,7 +99,7 @@ function Availability() {
         }
       })
       res.filter(x => x.length > 0).length === 0 && setNoDataFound(null);
-    }).catch(err => {console.log(err); setError(`Request failed with status code ${err.request.status}`)})
+    }).catch(err => {console.log(err); setError(`Request failed with status code 404`)})
     setLoading(true);
     return () => {
       if (source) {
@@ -138,7 +140,7 @@ function Availability() {
 const searchFn = (rows) => rows.filter((row) => row.app_name.indexOf(searchAppName) > -1).filter((row) => row.service_name.indexOf(searchFlowName) > -1);
  
   if(noDataFound == null){
-    return <MainBox><h1 style={{color: "grey", marginTop:260 }} >No data found</h1></MainBox> 
+    return <MainBox><h1 style={{color: "grey", marginTop:260 }} >{noDataAvailableMessage}</h1></MainBox> 
   }
   return (
     <MainBox>

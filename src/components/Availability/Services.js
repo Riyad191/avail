@@ -92,7 +92,7 @@ export const iconsAndColors = {
 
 export const AvailabilityTypes = (date, percent) => {
   if(date !== "no data available"){
-   return percent > 99.95 ? <Success /> : percent < 99 && percent >= 1 ? <Denger /> : <Warning />;
+   return percent > 99.95 ? <Success /> : percent < 97 && percent >= 1 ? <Denger /> : <Warning />;
   }
  return <Secondary />
 }
