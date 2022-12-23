@@ -15,7 +15,7 @@ function Card_Title({ data }) {
         <Tooltip title={`service name`} placement="top" followCursor><Title>{charactersLimit(data.service_name)}</Title></Tooltip>
       </Element>
       <Element> 
-        <Tooltip title={`flow name`} placement="top" followCursor><Title>{charactersLimit(data.flow_name)}</Title></Tooltip>
+        <Tooltip title={`flow name`} placement="top" followCursor><Title>{data.flow_name}</Title></Tooltip>
         {/* <Tooltip title={`last five days availability`} placement="top" followCursor><Title>last five days availability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {lastTitleDate} - {firstTitleDate} </Title></Tooltip> */}
       </Element>
     </CardTitle>
