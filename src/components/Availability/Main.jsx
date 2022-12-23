@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { GET_USERS } from "../../store/actions";
 import { TabBoxMain, TabBox } from "./styles";
 import Availability from "./Availability";
+import ButtonsComponent from "../Tools/ButtonsComponent";
 
 export default function LabTabs() {
   const dispatch = useDispatch();
@@ -11,6 +12,14 @@ export default function LabTabs() {
   const [apps, setApps] = useState([]);
   useEffect(() => { dispatch({ type: GET_USERS })}, [dispatch]);
   useEffect(() => setApps(availData.map((data) => Object.values(data)).splice(0, 1).flat(Infinity)),[availData]);
-  return <TabBoxMain><TabBox><Availability apps={apps} /></TabBox></TabBoxMain>
+  return (
+    <TabBoxMain>
+      <ButtonsComponent />
+      <TabBox>
+        <Availability apps={apps} />
+        </TabBox>
+      </TabBoxMain>
+    
+    ) 
 }
 

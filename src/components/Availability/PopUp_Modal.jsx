@@ -71,7 +71,7 @@ const PopUpModel = ({show, modalAppNameVar, modalFlowNameVar, openModal, setOpen
                 {newAveraveData.slice(144).map((item, i) => {
                   return (
                     <Box key={i}>
-                      <Tooltip title={ item.create_date == "no data available" ? <Typography sx={{fontSize: "12px"}} >no data available</Typography> : <Typography sx={{fontSize: "12px"}} > Date: {`${item.create_date.slice(0, 10)}`}, Time: {`${item.create_date.slice(12, 19)}`}, Availability: {`${item.avail_percent}%`}</Typography> } arrow>
+                      <Tooltip title={ item.create_date == "no data available" ? <Typography sx={{fontSize: "12px"}} >no data available</Typography> : <Typography sx={{fontSize: "12px"}} > Date: {`${item.create_date.slice(0, 10)}`}, Time: {`${item.create_date.slice(12, 19)}`}, Availability: {`${item.avail_percent.toPrecision(3)}%`} </Typography> } arrow>
                       {AvailabilityTypes(item.create_date, item.avail_percent)}
                       </Tooltip>
                     </Box>
