@@ -33,7 +33,6 @@ sagaMiddleware.run(rootSaga);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <Provider store={store}>
-      {/* <Api/> */}
       <App />
     </Provider>
 );

@@ -54,3 +54,9 @@ export function seAvailabilityDate(availabilityData) {
       payload: availabilityData
     };
   }
+export function setRecentFiveDays(recentFiveDays) {
+    return {
+      type: actionTypes.RECENT_FIVE_DAYS,
+      payload: recentFiveDays
+    };
+  }

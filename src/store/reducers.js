@@ -31,6 +31,7 @@ const pillarsInitialState = {
   availabilityDate: "",
   mainData: [],
   barsData: null,
+  recentFiveDays: [],
 }
 const pillarNameReducer = (state = pillarsInitialState , action) => {
   switch (action.type) {
@@ -52,6 +53,8 @@ const pillarNameReducer = (state = pillarsInitialState , action) => {
       return { ...state, barsData: action.payload };
     case actionTypes.AVAILABILITY_DATE:
       return { ...state, availabilityDate: action.payload };
+    case actionTypes.RECENT_FIVE_DAYS:
+      return { ...state, recentFiveDays: action.payload };
     default:
       return state;
   }
