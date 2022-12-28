@@ -17,7 +17,8 @@ const Navebar = () => {
             <img src={navbarLogo} style={{ height: 40, margin: 4 }}/><Typography variant="h6">OSCS</Typography>
           </LogoStack>
           <Link to={`/availability/${pillarName}`}><Typography variant="subtitle1">Availability</Typography></Link>
-          <Link to={`/data/${pillarName}`}><Typography variant="subtitle1">Data</Typography></Link>
+          {/* <Link to={`/data/`}><Typography variant="subtitle1">Data</Typography></Link> */}
+          <Typography variant="subtitle1">Data</Typography>
           <Typography variant="subtitle1">Infomartion</Typography>
           <Typography variant="subtitle1">Projects</Typography>
         </NavToolbar>
