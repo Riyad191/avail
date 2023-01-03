@@ -10,6 +10,10 @@ import "./styles.css";
 import Dates_Buttons from "./Dates_Buttons";
 import Dates_Data from "./Dates_Data";
 import { dataArrowsAndColors, getStateData } from "./Services"
+import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
 
 
 function Availability() {
@@ -33,6 +37,8 @@ function Availability() {
   const pillarNameParam = !pillarName ? "TRANSPORTATION" : pillarName.toUpperCase();
  
 
+
+
   const noDataAvailableMessage = "No data found";
   const source = axios.CancelToken.source();
   useEffect(() => {
@@ -41,14 +47,21 @@ function Availability() {
     setLastFiveDays([]);
     setNoDataFound([]);
     setFiveMinsDataWithDates([]);
+    console.log("availabilityDate",new Date(availabilityDate))
+    dayjs.extend(utc)
+    dayjs.extend(timezone);
+    const tz = "America/Los_Angeles"
+    const recentDays = new Array(5).fill(0).map((_, index) => {
+        return dayjs(availabilityDate).tz(tz).subtract(index, 'days').format().slice(0,10)
+    });
     const today = !availabilityDate ? new Date() : new Date(availabilityDate);
-    console.log("aaaaa",availabilityDate)
     const recentFiveDays = new Array(5).fill().map((_, index) => {
-      const nextDate = new Date();
-     !availabilityDate ? nextDate.setDate(today.getDate() - index) : nextDate.setDate(today.getDate() - index + 1);
+      const nextDate = !availabilityDate ? new Date() : new Date(availabilityDate)
+      nextDate.setDate(today.getDate() - index);
       return nextDate.toISOString().slice(0, 10);
     });
     dispatch(setRecentFiveDays(recentFiveDays))
+    console.log("recentFiveDays",recentFiveDays)
         Promise.all(
           recentFiveDays.map((date) => {
             return axios(
@@ -56,6 +69,7 @@ function Availability() {
                 cancelToken: source.token
               }
             ).then((res) => {
+              console.log(res)
               setFiveMinsData(res.data) 
               return res.data
             });
@@ -96,7 +110,7 @@ function Availability() {
             }
           });
           res.filter(x => x.length > 0).length === 0 && setNoDataFound(null);
-        }).catch(err => {console.log(err); setError(`Request failed with status code 404`)})
+        }).catch(err => {console.warn(err)})
     setLoading(true);
     return () => {
       if (source) {
@@ -142,8 +156,7 @@ function Availability() {
   }
   return (
     <MainBox>
-      {error ? <MainBox><h1 style={{color: "grey", marginTop:260 }} >{error}</h1></MainBox> :
-      loading ?   <Box sx={{ fontSize: 40, marginTop: 35, color: "blue" }}><CircularProgress /></Box>  :
+      {loading ? <Box sx={{ fontSize: 40, marginTop: 35, color: "blue" }}><CircularProgress /></Box>  :
        searchFn(fiveMinsDataWithDates)?.map((item, index) => {
           const toolTipData = item.date_and_percentage[0].slice(0,24)
           return (
