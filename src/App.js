@@ -3,7 +3,7 @@ import { Box, Paper, styled } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Availability, Data, Charts } from "./components";
+import { Availability } from "./components";
 import ButtonsComponent from "./components/Tools/ButtonsComponent";
 import FormComponent from "./components/Tools/FormComponent";
 import "./styles/styles.css";
@@ -35,8 +35,6 @@ const App = () => {
          <Route path="/" element={<Navigate to={`/availability/Transportation`} />} />
          {/* <Route path="/" element={<Navigate to={`/availability/${pillarName}`} />} /> */}
           <Route exact path="/availability/:pillar" element={<Availability />} />
-          <Route exact path="/data" element={<Data />} />
-          <Route exact path="/charts" element={<Charts />} />
         </Routes>
         <Footer />
       </AppPaper>
