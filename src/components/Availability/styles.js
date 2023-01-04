@@ -187,6 +187,15 @@ export const Title = styled(Box)(() => ({
   borderRadius: "3px",
   color: "#000"
 }));
+export const AppServiceTitle = styled(Box)(() => ({
+  margin: "0px 3px",
+  width: "100%",
+  textAlign: "center",
+  background: "#fff",
+  padding: "5px 0",
+  borderRadius: "3px",
+  color: "#000"
+}));
 export const Title_1 = styled(Box)(() => ({
   margin: "5px 0",
   width: "60%",

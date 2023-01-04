@@ -1,5 +1,5 @@
 import React from "react";
-import { CardTitle, Element, Title, Info } from "./styles";
+import { CardTitle, Element, Title, Info, AppServiceTitle } from "./styles";
 import { useSelector } from "react-redux";
 import { Tooltip } from "@mui/material";
 import "./styles.css";
@@ -15,7 +15,7 @@ function Card_Title({ data }) {
         <Tooltip title={`flow name`} placement="top" followCursor><Title>{ data.flow_name}</Title></Tooltip>
       </Element>
       <Element> 
-        <Tooltip title={`service name`} placement="top" followCursor><Title>{data.service_name}</Title></Tooltip>
+        <Tooltip title={`service name`} placement="top" followCursor><AppServiceTitle>{data.service_name}</AppServiceTitle></Tooltip>
         {/* <Tooltip title={`last five days availability`} placement="top" followCursor><Title>last five days availability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {lastTitleDate} - {firstTitleDate} </Title></Tooltip> */}
       </Element>
     </CardTitle>
