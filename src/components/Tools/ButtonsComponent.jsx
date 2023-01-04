@@ -27,7 +27,7 @@ const ButtonsComponent = () => {
     disptach(setPillarName(showPillar))
   },[showPillar])
   return (
-    <Box sx={{ color: "#142A7C", width: "100%", margin: 0 }}>
+    <Box sx={{ color: "#142A7C", width: "100%", padding: "0 10px" }}>
       <StyledStack direction="row" spacing={2}>
         {pillars.map((pillar, idx) => {
           return (
