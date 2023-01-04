@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { MainBox, DataCard } from "./styles";
-import { setAppsQuantity, setTodaysAvailability, setCardTitleData, setMainData, setBarsData, setRecentFiveDays } from "../../store/actionCreater";
+import { setAppsQuantity, setTodaysAvailability, setCardTitleData, setMainData, setBarsData, setRecentFiveDays, setFlowNameData, setAppNameData } from "../../store/actionCreater";
 import Cards_Title from "./Card_Title";
 import PopUp_Modal from "./PopUp_Modal";
 import { useSelector, useDispatch } from "react-redux";
@@ -47,13 +47,16 @@ function Availability() {
     setLastFiveDays([]);
     setNoDataFound([]);
     setFiveMinsDataWithDates([]);
-    console.log("availabilityDate",new Date(availabilityDate))
+    dispatch(setFlowNameData(""));
+    dispatch(setAppNameData(""));
     dayjs.extend(utc)
     dayjs.extend(timezone);
     const tz = "America/Los_Angeles"
     const recentDays = new Array(5).fill(0).map((_, index) => {
-        return dayjs(availabilityDate).tz(tz).subtract(index, 'days').format().slice(0,10)
+      const days = !availabilityDate ? dayjs() : dayjs(availabilityDate)
+      return days.tz(tz).subtract(index + 1, 'days').format().slice(0,10)
     });
+    console.log("dayjs()",recentDays)
     const today = !availabilityDate ? new Date() : new Date(availabilityDate);
     const recentFiveDays = new Array(5).fill().map((_, index) => {
       const nextDate = !availabilityDate ? new Date() : new Date(availabilityDate)
@@ -61,15 +64,16 @@ function Availability() {
       return nextDate.toISOString().slice(0, 10);
     });
     dispatch(setRecentFiveDays(recentFiveDays))
-    console.log("recentFiveDays",recentFiveDays)
+    // console.log("recentFiveDays",recentFiveDays)
         Promise.all(
+          // recentDays.map((date) => {
           recentFiveDays.map((date) => {
             return axios(
               `https://oscs-sre-api.dev.walmart.com/availability/app_info/date?pillar=${pillarNameParam}&&create_date=${date}`, {
                 cancelToken: source.token
               }
             ).then((res) => {
-              console.log(res)
+              // console.log(res)
               setFiveMinsData(res.data) 
               return res.data
             });
@@ -123,7 +127,7 @@ function Availability() {
     if(fiveMinsDataWithDates.length != 0){
       setLoading(false)
     };
-    console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
+    // console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
     // console.log("date time", fiveMinsDataWithDates.map(a => a.date_and_percentage.map(a => a.map(a => +a.create_date.slice(11,13)).sort((a,b)=>a-b))))
     let totalArr = []
     let barsData;

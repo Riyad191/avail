@@ -12,7 +12,6 @@ import { useSelector, useDispatch  } from "react-redux";
 
 const App = () => {
   // const pillarName = useSelector(state => state.pillarNameReducer.pillarName)
-
  const AppPaper = styled(Paper)(() => ({
     height: "100vh",
     display: "flex",

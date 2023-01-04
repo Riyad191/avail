@@ -7,19 +7,12 @@
 //   const [newData, setNewData] = useState([]);
 //   const [photos, setPhotos] = useState([]);
    
-  
-  
-
 //   // console.log("five days", recentFiveDays);
 //   // console.log("pillar", pillar)
 
 //   useEffect(()=>{
 //     axios(`https://oscs-sre-api.dev.walmart.com/availability/app_info/date?pillar=TRANSPORTATION&&createE_date=2022-12-7`).then(res => console.log(res.data)).catch(err => console.log("err", err.message))
 //   },[])
-
-
-
-
 
 //   // useEffect(() => {
 //   //   const url =  `https://oscs-sre-api.dev.walmart.com/availability/app_info/date?pillar=${pillar}&&create_date=`
