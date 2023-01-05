@@ -13,7 +13,7 @@ const TopSec = ({item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenMo
     return (
         <Box bgcolor="#e2e2e2" sx={{ width: "100%", padding: "3px 0", borderRadius: "5px" }}>
                   <div style={{textAlign: "center", padding: "0 0 6px 10px"}} >
-                    <Tooltip title={`last five days availability`} placement="top" followCursor><p style={{fontSize: "12px"}}>Available Data From <span style={{color: "blue", fontSize: "13px"}} >{lastTitleDate}</span> through <span style={{color: "blue", fontSize: "13px"}}>{firstTitleDate}</span>  </p></Tooltip>
+                    <Tooltip title={`last five days availability`} placement="top" followCursor><p style={{fontSize: "12px"}}>Available Data From <span style={{color: "blue", fontSize: "13px"}} >{lastTitleDate}UTC</span> through <span style={{color: "blue", fontSize: "13px"}}>{firstTitleDate}UTC</span>  </p></Tooltip>
                   </div>
                    
                 <div style={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
