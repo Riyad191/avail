@@ -2,6 +2,7 @@ import React from "react"
 import { Typography, Box, Tooltip } from "@mui/material";
 import { ArrowBox, BoxFn } from "./styles";
 import { useSelector } from "react-redux";
+import { FcCalendar } from "react-icons/fc"
 
 
 const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenModal}) => {
@@ -10,8 +11,9 @@ const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, 
   const lastTitleDate = recentFiveDays[recentFiveDays.length - 1];
     return (
         <Box bgcolor="#e2e2e2" sx={{ width: "100%", padding: "3px 0", borderRadius: "5px" }}>
-          <Box sx={{textAlign: "center", padding: "0 0 6px 10px"}} >
-            <Typography sx={{fontSize: "12px"}}>Available Data From <span style={{color: "blue", fontSize: "13px"}} >{lastTitleDate}UTC</span> through <span style={{color: "blue", fontSize: "13px"}}>{firstTitleDate}UTC</span>  </Typography>
+          <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 10px" }} >
+            <Typography sx={{fontSize: "12px"}}>Available Data</Typography>
+            <Typography sx={{fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center",}}><span style={{ fontSize: "17px", margin: "6px 4px 0 0"}}><FcCalendar/></span><span style={{color: "rgb(24, 36, 173)", fontSize: "13px"}} >{lastTitleDate}</span> - <span style={{color: "rgb(24, 36, 173)", fontSize: "13px"}}>{firstTitleDate} (UTC)</span> </Typography>
           </Box>
           <Box sx={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
               {item.date_and_percentage.map((innerItem, idx) => {
