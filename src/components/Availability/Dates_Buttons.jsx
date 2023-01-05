@@ -31,18 +31,22 @@ const TopSec = ({item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenMo
                       const filterDate = innerItem.map(a => a.create_date).filter(a => a != "no data available")
                       const boxDate = [...new Set(filterDate.map(a => a.slice(0,10)))];
                       return (
-                        <div onClick={() => {
+                        <Box onClick={() => {
                           setOpenModal(true);
                         }} key={idx}>
-                          <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}> {ave}% </Typography>
-                          <BoxFn onClick={() => {
-                            return modalStates(innerItem.map(a => a), boxDate, item.app_name, item.flow_name, ave)
-                          }}>
-                            <ArrowBox bgcolor={ dataArrowsAndColors(ave).color } sx={{ textAlign: "center" }}> {dataArrowsAndColors(ave).icon} </ArrowBox>
-                            <Typography sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}></Typography>
-                          </BoxFn>
-                          <div>{[...new Set(filterDate.map(a => a.slice(0,10)))].map(a => a.slice(5))}</div>
-                        </div>
+                          <Tooltip title={`click`} placement="top" followCursor>
+                            <Box>
+                              <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}> {ave}% </Typography>
+                              <BoxFn onClick={() => {
+                                return modalStates(innerItem.map(a => a), boxDate, item.app_name, item.flow_name, ave)
+                              }}>
+                                <ArrowBox bgcolor={ dataArrowsAndColors(ave).color } sx={{ textAlign: "center" }}> {dataArrowsAndColors(ave).icon} </ArrowBox>
+                                <Typography sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}></Typography>
+                              </BoxFn>
+                              <div>{[...new Set(filterDate.map(a => a.slice(0,10)))].map(a => a.slice(5))}</div>
+                            </Box>
+                          </Tooltip>
+                        </Box>
                       );
                     }).reverse()}
                 </div>
