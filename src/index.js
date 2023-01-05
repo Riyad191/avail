@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./store/rootSaga";
 import { createLogger } from "redux-logger";
-import Api from "./api"
+import Api from "./api2"
 
 // logger
 var logger = createLogger();
@@ -34,6 +34,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <Provider store={store}>
       <App />
+      {/* <Api/> */}
     </Provider>
 );
 

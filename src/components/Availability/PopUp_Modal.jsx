@@ -36,7 +36,7 @@ const PopUpModel = ({show, modalAppNameVar, modalFlowNameVar, openModal, setOpen
             <PopUpButton onClick={()=> {twelveHoursAvailability(144,288); setTime(false);}}><IoIosArrowForward/></PopUpButton>
             </Stack> */}
             <div style={{display: 'flex', alignItems: "center", justifyContent: "center", marginRight: "80px" }} >
-              <h2 style={{fontSize: 20}} >AVAILABILITY DATE:</h2>&nbsp;&nbsp;&nbsp;
+              <h2 style={{fontSize: 20}} >AVAILABILITY DATE ON</h2>&nbsp;&nbsp;&nbsp;
               <h2 style={{color: "blue"}} >{modalDate} (UTC)</h2>
             </div>
             <h3 title="hiiii" style={{ display: "flex", justifyContent: "center", alignItems: "center", background: "#eeeeee", padding: "5px 10px 5px 5px", borderRadius: "3px", border: `solid 1px ${dataArrowsAndColors(modalBoxPercentage).color}`, color: dataArrowsAndColors(modalBoxPercentage).color }}> <span style={{ fontSize: "25px", display: "flex", justifyContent: "center", alignItems: "center", }} >{dataArrowsAndColors(modalBoxPercentage).icon}</span>  {modalBoxPercentage}%</h3>

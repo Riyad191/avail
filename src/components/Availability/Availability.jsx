@@ -74,7 +74,7 @@ function Availability() {
                 cancelToken: source.token
               }
             ).then((res) => {
-              // console.log(res)
+              // console.log(res.data.sort((a,b)=> a.app_name.localeCompare(b.app_name)))
               setFiveMinsData(res.data) 
               return res.data
             });
