@@ -13,7 +13,7 @@ const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, 
         <Box bgcolor="#e2e2e2" sx={{ width: "100%", padding: "3px 0", borderRadius: "5px" }}>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 10px" }} >
             <Typography sx={{fontSize: "12px"}}>Available Data</Typography>
-            <Typography sx={{fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center",}}><span style={{ fontSize: "17px", margin: "6px 4px 0 0"}}><FcCalendar/></span><span style={{color: "rgb(24, 36, 173)", fontSize: "13px"}} >{lastTitleDate}</span> - <span style={{color: "rgb(24, 36, 173)", fontSize: "13px"}}>{firstTitleDate} (UTC)</span> </Typography>
+            <Typography sx={{fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center",}}><span style={{ fontSize: "17px", margin: "6px 4px 0 0"}}><FcCalendar/></span><span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}} >{`${lastTitleDate.slice(5)}-${lastTitleDate.slice(0,4)}`}</span> / <span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}}>{`${firstTitleDate.slice(5)}-${firstTitleDate.slice(0,4)}`} (UTC)</span> </Typography>
           </Box>
           <Box sx={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
               {item.date_and_percentage.map((innerItem, idx) => {
