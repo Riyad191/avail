@@ -29,6 +29,7 @@ const FormComponent = () => {
     <>
       <Box component="form" noValidate autoComplete="off" sx={{ width: "100%", display: "flex", alignItems: "center", padding: "9px 0", justifyContent: "space-between", borderRadius: 1 }}>
           <Box sx={{ width: "50%", display: "flex", alignItems: "center", justifyContent: "flex-start" }} >
+          <Tooltip title={`search by app name`} placement="top" followCursor>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -40,6 +41,8 @@ const FormComponent = () => {
               value={searchAppName}
               renderInput={(params) => <TextField {...params} label="App Name" size="small" />}
             />
+          </Tooltip>
+          <Tooltip title={`search by service name`} placement="top" followCursor>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -49,7 +52,10 @@ const FormComponent = () => {
               value={searchFlowName}
               renderInput={(params) => <TextField {...params} label="Service Name" size="small" />}
             />
+          </Tooltip>
+          <Tooltip title={`search by date`} placement="top" followCursor>
             <TextField onChange={(e)=> dispatch(seAvailabilityDate(e.target.value))} id="outlined-basic"  variant="outlined" size="small" type="date"  sx={{ width: 300 }} />
+          </Tooltip>
           </Box>
         <AvailbilityPercentageBox>
           <Box sx={{ borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center"  }} >
