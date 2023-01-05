@@ -12,11 +12,10 @@ const TopSec = ({item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenMo
   console.log("item",item)
     return (
         <Box bgcolor="#e2e2e2" sx={{ width: "100%", padding: "3px 0", borderRadius: "5px" }}>
-                  <div style={{textAlign: "center", padding: "0 0 6px 10px"}} >
-                    <Tooltip title={`last five days availability`} placement="top" followCursor><p style={{fontSize: "12px"}}>Available Data From <span style={{color: "blue", fontSize: "13px"}} >{lastTitleDate}UTC</span> through <span style={{color: "blue", fontSize: "13px"}}>{firstTitleDate}UTC</span>  </p></Tooltip>
-                  </div>
-                   
-                <div style={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
+                  <Box sx={{textAlign: "center", padding: "0 0 6px 10px"}} >
+                     <Typography sx={{fontSize: "12px"}}>Available Data From <span style={{color: "blue", fontSize: "13px"}} >{lastTitleDate}UTC</span> through <span style={{color: "blue", fontSize: "13px"}}>{firstTitleDate}UTC</span>  </Typography>
+                  </Box>
+                <Box sx={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
                   {
                   // item.date_and_percentage.map(innerItem => innerItem.filter(a => a.create_date !== "no data available")).filter(a => a.length !== 0) 
                   item.date_and_percentage.map((innerItem, idx) => {
@@ -49,7 +48,7 @@ const TopSec = ({item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenMo
                         </Box>
                       );
                     }).reverse()}
-                </div>
+                </Box>
               </Box>
     )
 }
