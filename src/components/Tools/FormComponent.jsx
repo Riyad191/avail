@@ -60,7 +60,7 @@ const FormComponent = () => {
         <AvailbilityPercentageBox>
           <Box sx={{ borderRadius: "3px", height: 40, display: "flex", alignItems: "center",justifyContent: "center"  }} >
              <Typography>
-                <Tooltip title="Today's Availability" placement="top" followCursor><span style={{color:"#4d4d4d"}} >Overall Availability:</span></Tooltip>
+                <span style={{color:"#4d4d4d"}} >Overall Availability:</span>
                 &nbsp; {todaysAvailability > 1 ? `${todaysAvailability.toPrecision(3)}` : "0.00"}% &nbsp;  <span style={{color:"#4d4d4d"}} > ({appsNum} apps)</span>
              </Typography>
           </Box>
