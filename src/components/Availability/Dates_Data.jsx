@@ -14,7 +14,7 @@ const BottomSec = React.memo(({ toolTipData }) => {
             {toolTipData.map((item, idx) => {
               return (
                 <div key={idx}>
-                  <Tooltip title={ item.create_date == "no data available" ? <Typography sx={{fontSize: "12px"}} >no data available</Typography> : <Typography sx={{fontSize: "12px"}} > Date: {`${item.create_date.slice(0, 10)}`}, Time: {`${item.create_date.slice(12, 19)}`}, Availability: {`${item.avail_percent.toPrecision(3)}%`}</Typography> } arrow>
+                  <Tooltip title={ item.create_date == "no data available" ? <Typography sx={{fontSize: "12px"}} >no data available</Typography> : <Typography sx={{fontSize: "12px"}} > Date: {`${item.create_date.slice(0, 10)}`}, Time: {`${item.create_date.slice(12, 19)}`}, Availability: {`${item.avail_percent === null ? 0 : item.avail_percent.toPrecision(3)}%`}</Typography> } arrow>
                     {/* {item.create_date !== "no data available" ? <Success /> : <Secondary />} */}
                     {AvailabilityTypes(item.create_date, item.avail_percent)}
                   </Tooltip>

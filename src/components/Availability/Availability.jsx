@@ -56,7 +56,7 @@ function Availability() {
       const days = !availabilityDate ? dayjs() : dayjs(availabilityDate)
       return days.tz(tz).subtract(index + 1, 'days').format().slice(0,10)
     });
-    console.log("dayjs()",recentDays)
+    // console.log("dayjs()",recentDays)
     const today = !availabilityDate ? new Date() : new Date(availabilityDate);
     const recentFiveDays = new Array(5).fill().map((_, index) => {
       const nextDate = !availabilityDate ? new Date() : new Date(availabilityDate)
@@ -105,10 +105,14 @@ function Availability() {
               const finalArr = dataArr.map((n,i) => orgArr[i] ?? n)
               // appData.date_and_percentage = finalArr.reverse();
               appData.date_and_percentage = appMap[appData.index]
-           
+              // console.log("appMap[appData.index]",appMap[appData.index])
+              
             });
           });
+          // console.log("resssssss",res)
+
           res.map(a => {
+            // console.log("aaaaaaa", a.length)
             if(a.length > 0){
               return setFiveMinsDataWithDates(a);
             }
