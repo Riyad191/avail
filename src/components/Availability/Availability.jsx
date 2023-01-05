@@ -20,6 +20,7 @@ function Availability() {
   const dispatch = useDispatch();
   const [fiveMinsData, setFiveMinsData] = React.useState([]);
   const [newAveraveData, setNewAverageData] = useState([]);
+  const [modalDate, setModalDate] = useState("")
   const [show, setShow] = useState(false);
   const [openModal, setOpenModal] = React.useState();
   const [modalAppNameVar, setModalAppNameVar] = React.useState("");
@@ -103,7 +104,7 @@ function Availability() {
               const orgArr = appMap[appData.index];
               const dataArr = new Array(5).fill(newArr)
               const finalArr = dataArr.map((n,i) => orgArr[i] ?? n)
-              // appData.date_and_percentage = finalArr.reverse();
+              // appData.date_and_percentage = finalArr;
               appData.date_and_percentage = appMap[appData.index]
               // console.log("appMap[appData.index]",appMap[appData.index])
               
@@ -149,8 +150,9 @@ function Availability() {
     dispatch(setBarsData(barsData))
   }, [fiveMinsDataWithDates]);
   
-  const modalStates = (i, x, y, z) => {
+  const modalStates = (i, j, x, y, z) => {
     setNewAverageData(i);
+    setModalDate(j);
     setModalAppNameVar(x);
     setModalFlowNameVar(y);
     setModalBoxPercentage(z);
@@ -186,6 +188,7 @@ function Availability() {
         show={show}
         modalAppNameVar={modalAppNameVar} 
         modalFlowNameVar={modalFlowNameVar}
+        modalDate={modalDate}
         openModal={openModal}
         setOpenModal={setOpenModal} 
         newAveraveData={newAveraveData}

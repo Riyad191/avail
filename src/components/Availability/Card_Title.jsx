@@ -16,8 +16,10 @@ function Card_Title({ data }) {
       </Element>
       <Element> 
         <Tooltip title={`service name`} placement="top" followCursor><AppServiceTitle>{data.service_name}</AppServiceTitle></Tooltip>
-        {/* <Tooltip title={`last five days availability`} placement="top" followCursor><Title>last five days availability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {lastTitleDate} - {firstTitleDate} </Title></Tooltip> */}
       </Element>
+      {/* <Element> 
+        <Tooltip title={`last five days availability`} placement="top" followCursor><Title>Available &nbsp; Data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; From {lastTitleDate} through {firstTitleDate} </Title></Tooltip>
+      </Element> */}
     </CardTitle>
   );
 }
