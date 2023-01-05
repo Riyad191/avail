@@ -27,7 +27,7 @@ const PopUpModel = ({show, modalAppNameVar, modalFlowNameVar, openModal, setOpen
         <SytledModal open={openModal} onClose={(e) => setOpenModal(false)} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" sx={{ cursor: "pointer" }}>
           <Box sx={{ width: "98%", height: "40%", background: "#fff", padding: "0 20px", borderRadius: "5px", display: "flex",justifyContent: "center", alignItems: "center", flexDirection: "column" }} >
             <Stack direction="row" sx={{justifyContent: "space-between", alignItems: "center", width:"100%"}} >
-            <h3>{`${modalAppNameVar} | ${modalFlowNameVar}`}</h3>
+            <h3>{`${modalAppNameVar.toUpperCase()} | ${modalFlowNameVar.toUpperCase()}`}</h3>
             {/* <Stack direction="row" sx={{justifyContent: "space-between", alignItems: "center", marginLeft: "-160px"}} >
             <PopUpButton   onClick={()=> {twelveHoursAvailability(0,144); setTime(true);}}><IoIosArrowBack /></PopUpButton> 
             &nbsp;&nbsp;&nbsp; 
