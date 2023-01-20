@@ -9,7 +9,7 @@ const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, 
   const recentFiveDays = useSelector((state) => state.pillarNameReducer.recentFiveDays);
   const firstTitleDate = recentFiveDays[0];
   const lastTitleDate = recentFiveDays[recentFiveDays.length - 1];
-  console.log("recentFiveDays.length",item)
+  // console.log("recentFiveDays.length",item)
     return (
         <Box bgcolor="#e2e2e2" sx={{width: "100%", padding: "3px 0", borderRadius: "5px"}}>
           <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", height: "30%", padding: "0 20px", width: "100%"}} >

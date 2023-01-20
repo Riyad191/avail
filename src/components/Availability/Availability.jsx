@@ -61,8 +61,8 @@ function Availability() {
       return dateArray;
   }
     const momentsDates = getDates(availabilityDateFrom,availabilityDateTo);
-    console.log("dateRange(availabilityDateFrom,availabilityDateTo)",momentsDates);
-    console.log('datesRangeArr: ',datesRangeArr)
+    // console.log("dateRange(availabilityDateFrom,availabilityDateTo)",momentsDates);
+    // console.log('datesRangeArr: ',datesRangeArr)
 
     
     // setDatesRange()
@@ -84,7 +84,7 @@ function Availability() {
       return nextDate.toISOString().slice(0, 10);
      });
     }
-    console.log("recentFiveDays",recentFiveDays)
+    // console.log("recentFiveDays",recentFiveDays)
     dispatch(availabilityDateFrom && availabilityDateTo ? setRecentFiveDays(momentsDates.reverse()) : setRecentFiveDays(recentFiveDays))
         Promise.all(
             recentFiveDays.map((date) => {
@@ -126,6 +126,7 @@ function Availability() {
               appData.date_and_percentage = appMap[appData.index]
             });
           });
+          res.sort((a,b)=>a.length-b.length)
           res.map(a => {
             if(a.length > 0){
               return setFiveMinsDataWithDates(a);
