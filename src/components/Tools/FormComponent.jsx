@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TextField, Box, Typography, Autocomplete, styled } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setFlowNameData, setAppNameData, seAvailabilityDate } from "../../store/actionCreater"
+import { setFlowNameData, setAppNameData, seAvailabilityDateFrom, seAvailabilityDateTo } from "../../store/actionCreater"
 import { Tooltip } from "@mui/material";
  
 
@@ -53,8 +53,14 @@ const FormComponent = () => {
               renderInput={(params) => <TextField {...params} label="Service Name" size="small" />}
             />
           </Tooltip>
-          <Tooltip title={`search by date`} placement="top" followCursor>
-            <TextField onChange={(e)=> dispatch(seAvailabilityDate(e.target.value))} id="outlined-basic"  variant="outlined" size="small" type="date"  sx={{ width: 300 }} />
+          
+          From:&nbsp;&nbsp;
+          <Tooltip title={``} placement="top" followCursor>
+            <TextField onChange={(e)=> dispatch(seAvailabilityDateFrom(e.target.value))} id="outlined-basic"  variant="outlined" size="small" type="date"  sx={{ marginRight: 1 , width: 300 }} />
+          </Tooltip>
+          To:&nbsp;&nbsp;
+          <Tooltip title={``} placement="top" followCursor>
+            <TextField onChange={(e)=> dispatch(seAvailabilityDateTo(e.target.value))} id="outlined-basic"  variant="outlined" size="small" type="date"  sx={{ width: 300 }} />
           </Tooltip>
           </Box>
         <AvailbilityPercentageBox>

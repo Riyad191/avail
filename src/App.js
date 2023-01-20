@@ -24,15 +24,10 @@ const App = () => {
   
   return (
     <BrowserRouter>
-      <AppPaper bgcolor={"backgroud.default"}>
+      <AppPaper>
         <Navbar />
-        <Box sx={{ width: "100%", padding: "10px 10px 0"}}>
-          {/* <ButtonsComponent /> */}
-          {/* <FormComponent /> */}
-        </Box>
         <Routes>
          <Route path="/" element={<Navigate to={`/availability/Transportation`} />} />
-         {/* <Route path="/" element={<Navigate to={`/availability/${pillarName}`} />} /> */}
           <Route exact path="/availability/:pillar" element={<Availability />} />
         </Routes>
         <Footer />

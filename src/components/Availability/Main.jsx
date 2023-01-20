@@ -13,11 +13,9 @@ export default function LabTabs() {
   useEffect(() => { dispatch({ type: GET_USERS })}, [dispatch]);
   useEffect(() => setApps(availData.map((data) => Object.values(data)).splice(0, 1).flat(Infinity)),[availData]);
   return (
-    <TabBoxMain>
-      <ButtonsComponent />
-      <TabBox>
+      <TabBoxMain>
+        <ButtonsComponent />
         <Availability apps={apps} />
-        </TabBox>
       </TabBoxMain>
     
     ) 

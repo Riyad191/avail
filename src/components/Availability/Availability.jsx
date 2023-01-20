@@ -3,6 +3,8 @@ import { Box, CircularProgress } from "@mui/material";
 import { MainBox, DataCard } from "./styles";
 import { setAppsQuantity, setTodaysAvailability, setCardTitleData, setMainData, setBarsData, setRecentFiveDays, setFlowNameData, setAppNameData } from "../../store/actionCreater";
 import Cards_Title from "./Card_Title";
+import Kafka from "./Kafka";
+import Kafka_Dates_Data from "./Kafka_Dates_Data";
 import PopUp_Modal from "./PopUp_Modal";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
@@ -13,7 +15,7 @@ import { dataArrowsAndColors, getStateData } from "./Services"
 import dayjs from "dayjs";
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-
+import moment from 'moment'
 
 
 function Availability() {
@@ -27,14 +29,17 @@ function Availability() {
   const [modalFlowNameVar, setModalFlowNameVar] = React.useState("");
   const [modalBoxPercentage, setModalBoxPercentage] = React.useState("");
   const [fiveMinsDataWithDates, setFiveMinsDataWithDates] = React.useState([]);
+  // const [datesRange, setDatesRange] = React.useState(recentFiveDays);
   const [noDataFound, setNoDataFound] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("")
   const [lastFiveDays, setLastFiveDays] = useState([]);
+  // const [datesRange, setDatesRange] = useState([])
   const pillarName = useSelector((state) => state.pillarNameReducer.pillarName);
   const searchAppName = useSelector((state) => state.pillarNameReducer.filterAppName);
   const searchFlowName = useSelector((state) => state.pillarNameReducer.filterFlowName);
-  const availabilityDate = useSelector((state) => state.pillarNameReducer.availabilityDate);
+  const availabilityDateFrom = useSelector((state) => state.pillarNameReducer.availabilityDateFrom);
+  const availabilityDateTo = useSelector((state) => state.pillarNameReducer.availabilityDateTo);
   const pillarNameParam = !pillarName ? "TRANSPORTATION" : pillarName.toUpperCase();
  
 
@@ -43,6 +48,23 @@ function Availability() {
   const noDataAvailableMessage = "No data found";
   const source = axios.CancelToken.source();
   useEffect(() => {
+    const datesRangeArr = [{"from": availabilityDateFrom},{"to": availabilityDateTo}]
+    function getDates(startDate, stopDate) {
+      var dateArray = [];
+      var currentDate = moment(startDate);
+      var stopDate = moment(stopDate);
+      while (currentDate <= stopDate) {
+          dateArray.push( moment(currentDate).format('YYYY-MM-DD') )
+          currentDate = moment(currentDate).add(1, 'days');
+      }
+      return dateArray;
+  }
+    const momentsDates = getDates(availabilityDateFrom,availabilityDateTo);
+    console.log("dateRange(availabilityDateFrom,availabilityDateTo)",momentsDates);
+    console.log('datesRangeArr: ',datesRangeArr)
+
+    
+    // setDatesRange()
     getStateData()
     setError("")
     setLastFiveDays([]);
@@ -50,31 +72,26 @@ function Availability() {
     setFiveMinsDataWithDates([]);
     dispatch(setFlowNameData(""));
     dispatch(setAppNameData(""));
-    dayjs.extend(utc)
-    dayjs.extend(timezone);
-    const tz = "America/Los_Angeles"
-    const recentDays = new Array(5).fill(0).map((_, index) => {
-      const days = !availabilityDate ? dayjs() : dayjs(availabilityDate)
-      return days.tz(tz).subtract(index + 1, 'days').format().slice(0,10)
-    });
-    // console.log("dayjs()",recentDays)
-    const today = !availabilityDate ? new Date() : new Date(availabilityDate);
-    const recentFiveDays = new Array(5).fill().map((_, index) => {
-      const nextDate = !availabilityDate ? new Date() : new Date(availabilityDate)
+    let recentFiveDays;
+    if(availabilityDateFrom && availabilityDateTo){
+      recentFiveDays = momentsDates;
+    } else {
+      const today = new Date()
+      recentFiveDays = new Array(5).fill().map((_, index) => {
+      const nextDate = new Date()
       nextDate.setDate(today.getDate() - index);
       return nextDate.toISOString().slice(0, 10);
-    });
-    dispatch(setRecentFiveDays(recentFiveDays))
-    // console.log("recentFiveDays",recentFiveDays)
+     });
+    }
+    console.log("recentFiveDays",recentFiveDays)
+    dispatch(availabilityDateFrom && availabilityDateTo ? setRecentFiveDays(momentsDates.reverse()) : setRecentFiveDays(recentFiveDays))
         Promise.all(
-          // recentDays.map((date) => {
-          recentFiveDays.map((date) => {
+            recentFiveDays.map((date) => {
             return axios(
               `https://oscs-sre-api.dev.walmart.com/availability/app_info/date?pillar=${pillarNameParam}&&create_date=${date}`, {
                 cancelToken: source.token
               }
             ).then((res) => {
-              // console.log(res.data.sort((a,b)=> a.app_name.localeCompare(b.app_name)))
               setFiveMinsData(res.data) 
               return res.data
             });
@@ -106,14 +123,9 @@ function Availability() {
               const finalArr = dataArr.map((n,i) => orgArr[i] ?? n)
               // appData.date_and_percentage = finalArr;
               appData.date_and_percentage = appMap[appData.index]
-              // console.log("appMap[appData.index]",appMap[appData.index])
-              
             });
           });
-          // console.log("resssssss",res)
-
           res.map(a => {
-            // console.log("aaaaaaa", a.length)
             if(a.length > 0){
               return setFiveMinsDataWithDates(a);
             }
@@ -126,14 +138,13 @@ function Availability() {
         source.cancel();
       }
     }
-  }, [pillarNameParam, availabilityDate]);
-
+  
+  }, [pillarNameParam, availabilityDateTo]);
+  
   useEffect(() => {
     if(fiveMinsDataWithDates.length != 0){
       setLoading(false)
     };
-    // console.log("fiveMinsDataWithDates", fiveMinsDataWithDates);
-    // console.log("date time", fiveMinsDataWithDates.map(a => a.date_and_percentage.map(a => a.map(a => +a.create_date.slice(11,13)).sort((a,b)=>a-b))))
     let totalArr = []
     let barsData;
     fiveMinsDataWithDates.map(a => {
@@ -158,6 +169,13 @@ function Availability() {
     setModalBoxPercentage(z);
     setShow(true);
   };
+  
+  const [openDataCard, setOpenDataCard] = useState(-1);
+
+  const openDataCardHandelClick = (i) => {
+    if(openDataCard === i) setOpenDataCard(-1);
+    else setOpenDataCard(i) 
+  }
 
   const searchFn = (rows) => rows.filter((row) => row.app_name.indexOf(searchAppName) > -1).filter((row) => row.service_name.indexOf(searchFlowName) > -1);
  
@@ -171,16 +189,30 @@ function Availability() {
           const toolTipData = item.date_and_percentage[0].slice(0,24)
           return (
             <DataCard key={index}>
-              <Cards_Title data={item} />
-              <Dates_Buttons
-               item={item}
-               modalStates={modalStates}
-               lastFiveDays={lastFiveDays} 
-               setOpenModal={setOpenModal}
-               dataArrowsAndColors={dataArrowsAndColors}
-              />
-              <Dates_Data toolTipData={toolTipData} />
-            </DataCard>
+              <Cards_Title data={item} index={index} setOpenDataCard={setOpenDataCard} openDataCard={openDataCard} openDataCardHandelClick={openDataCardHandelClick} />
+              {openDataCard === index ? 
+               <Box sx={{width: "100%"}} >
+               <Kafka
+                item={item}
+                modalStates={modalStates}
+                lastFiveDays={lastFiveDays} 
+                setOpenModal={setOpenModal}
+                dataArrowsAndColors={dataArrowsAndColors}
+                /> 
+               <Kafka_Dates_Data toolTipData={toolTipData} />
+             </Box> :
+              <Box sx={{width: "100%"}} >
+                <Dates_Buttons
+                 item={item}
+                 modalStates={modalStates}
+                 lastFiveDays={lastFiveDays} 
+                 setOpenModal={setOpenModal}
+                 dataArrowsAndColors={dataArrowsAndColors}
+                 /> 
+                <Dates_Data toolTipData={toolTipData} />
+              </Box>
+              }
+            </DataCard>  
           );
         })
        }

@@ -3,7 +3,7 @@ import { CardTitle, Element, Title, Info, AppServiceTitle } from "./styles";
 import { useSelector } from "react-redux";
 import { Tooltip } from "@mui/material";
 import "./styles.css";
-function Card_Title({ data }) {
+function Card_Title({ data, openDataCard, setOpenDataCard, openDataCardHandelClick, index }) {
   const recentFiveDays = useSelector((state) => state.pillarNameReducer.recentFiveDays);
   const charactersLimit = x => x.toString().length > 12 ? `${x.slice(0, 12)}...` : x;
   const firstTitleDate = recentFiveDays[0].slice(5)
@@ -15,7 +15,8 @@ function Card_Title({ data }) {
         <Tooltip title={`flow name`} placement="top" followCursor><Title>{ data.flow_name}</Title></Tooltip>
       </Element>
       <Element> 
-        <Tooltip title={`service name`} placement="top" followCursor><AppServiceTitle>{data.service_name}</AppServiceTitle></Tooltip>
+        <Tooltip title={`service name`} placement="top" followCursor><Title onClick={()=> openDataCardHandelClick(-1)} >{data.service_name}</Title></Tooltip>
+        {/* <Tooltip title={`service name`} placement="top" followCursor><Title onClick={()=> openDataCardHandelClick(index)} >Kafka</Title></Tooltip> */}
       </Element>
       {/* <Element> 
         <Tooltip title={`last five days availability`} placement="top" followCursor><Title>Available &nbsp; Data &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; From {lastTitleDate} through {firstTitleDate} </Title></Tooltip>

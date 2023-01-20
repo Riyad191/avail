@@ -28,7 +28,8 @@ const pillarsInitialState = {
   cardTitleData: [],
   filterAppName: "",
   filterFlowName: "",
-  availabilityDate: "",
+  availabilityDateFrom: "",
+  availabilityDateTo: "",
   mainData: [],
   barsData: null,
   recentFiveDays: [],
@@ -51,8 +52,10 @@ const pillarNameReducer = (state = pillarsInitialState , action) => {
       return { ...state, mainData: action.payload };
     case actionTypes.BARS_DATA:
       return { ...state, barsData: action.payload };
-    case actionTypes.AVAILABILITY_DATE:
-      return { ...state, availabilityDate: action.payload };
+    case actionTypes.AVAILABILITY_DATE_FROM:
+      return { ...state, availabilityDateFrom: action.payload };
+    case actionTypes.AVAILABILITY_DATE_TO:
+      return { ...state, availabilityDateTo: action.payload };
     case actionTypes.RECENT_FIVE_DAYS:
       return { ...state, recentFiveDays: action.payload };
     default:

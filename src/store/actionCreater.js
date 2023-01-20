@@ -48,10 +48,16 @@ export function setBarsData(barsData) {
       payload: barsData
     };
   }
-export function seAvailabilityDate(availabilityData) {
+export function seAvailabilityDateFrom(availabilityDateFrom) {
     return {
-      type: actionTypes.AVAILABILITY_DATE,
-      payload: availabilityData
+      type: actionTypes.AVAILABILITY_DATE_FROM,
+      payload: availabilityDateFrom
+    };
+  }
+export function seAvailabilityDateTo(availabilityDateTo) {
+    return {
+      type: actionTypes.AVAILABILITY_DATE_TO,
+      payload: availabilityDateTo
     };
   }
 export function setRecentFiveDays(recentFiveDays) {

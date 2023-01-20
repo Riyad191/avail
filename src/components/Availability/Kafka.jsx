@@ -9,16 +9,13 @@ const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, 
   const recentFiveDays = useSelector((state) => state.pillarNameReducer.recentFiveDays);
   const firstTitleDate = recentFiveDays[0];
   const lastTitleDate = recentFiveDays[recentFiveDays.length - 1];
-  console.log("recentFiveDays.length",item)
     return (
-        <Box bgcolor="#e2e2e2" sx={{width: "100%", padding: "3px 0", borderRadius: "5px"}}>
-          <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", height: "30%", padding: "0 20px", width: "100%"}} >
+        <Box bgcolor="#e2e2e2" sx={{ width: "100%", padding: "3px 0", borderRadius: "5px" }}>
+          <Box sx={{display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 10px" }} >
             <Typography sx={{fontSize: "12px"}}>Available Data</Typography>
-            <Typography sx={{fontSize: "12px", display: "flex",  justifyContent: "space-between", alignItems: "center",}}><span style={{ fontSize: "17px", margin: "6px 4px 0 0"}}><FcCalendar/></span><span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}} >{`${lastTitleDate.slice(5)}-${lastTitleDate.slice(0,4)}`}</span> / <span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}}>{`${firstTitleDate.slice(5)}-${firstTitleDate.slice(0,4)}`} (UTC)</span> </Typography>
+            <Typography sx={{fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "center",}}><span style={{ fontSize: "17px", margin: "6px 4px 0 0"}}><FcCalendar/></span><span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}} >{`${lastTitleDate.slice(5)}-${lastTitleDate.slice(0,4)}`}</span> / <span style={{color: "rgb(7, 18, 138)", fontSize: "13px"}}>{`${firstTitleDate.slice(5)}-${firstTitleDate.slice(0,4)}`} (UTC)</span> </Typography>
           </Box>
-          <Box sx={{ 
-            overflow: "auto",
-             display: "flex", justifyContent: item.date_and_percentage.length < 6 ? "space-around" : "flex-start", alignItems: "center"}}>
+          <Box sx={{ display: "flex", width: "100%", justifyContent: "space-around", alignItems: "center"}}>
               {item.date_and_percentage.map((innerItem, idx) => {
               const bottomDates = innerItem.filter(a => a.create_date !== "no data available").map(a => a.create_date.slice(0,10));
               const uniqueBottomDate = [...new Set(bottomDates)];
@@ -29,20 +26,19 @@ const ButtonsAndDates = ({item, dataArrowsAndColors, modalStates, lastFiveDays, 
                 const ave = average.toString().length > 4 ? +average.toPrecision(3) : average
                 const filterDate = innerItem.map(a => a.create_date).filter(a => a != "no data available")
                 const boxDate = [...new Set(filterDate.map(a => a.slice(0,10)))];
+                const zero = 0;
                 return (
                   <Box onClick={() => {
                     setOpenModal(true);
                   }} key={idx}>
                     <Tooltip title={`click`} placement="top" followCursor>
-                      <Box sx={{margin: "0 20px"}} >
-                        <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}> {ave}% </Typography>
-                        <BoxFn onClick={() => {
-                          return modalStates(innerItem.map(a => a), boxDate, item.app_name, item.flow_name, ave)
-                        }}>
-                          <ArrowBox bgcolor={ dataArrowsAndColors(ave).color } sx={{ textAlign: "center" }}> {dataArrowsAndColors(ave).icon} </ArrowBox>
-                          <Typography sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}></Typography>
+                      <Box>
+                        <Typography variant="subtotal-1" sx={{ color: dataArrowsAndColors(ave).color, textAlign: "center" }}> {zero}% </Typography>
+                        <BoxFn>
+                          <ArrowBox bgcolor={ dataArrowsAndColors(zero).color } sx={{ textAlign: "center" }}> {dataArrowsAndColors(zero).icon} </ArrowBox>
+                          <Typography sx={{ color: dataArrowsAndColors(zero).color, textAlign: "center" }}></Typography>
                         </BoxFn>
-                        <Box sx={{width: "50px"}} >{[...new Set(filterDate.map(a => a.slice(0,10)))].map(a => a.slice(5))}</Box>
+                        <div>{[...new Set(filterDate.map(a => a.slice(0,10)))].map(a => a.slice(5))}</div>
                       </Box>
                     </Tooltip>
                   </Box>

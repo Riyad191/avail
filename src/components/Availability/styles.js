@@ -18,8 +18,9 @@ export const MainBox = styled(Box)(() => ({
   flexWrap: "wrap",
   justifyContent: "center",
   alignItems: "flex-start",
-  overflow: "scroll",
+  overflowY: "scroll",
   color: "#636363",
+  height: "85%",
 }));
 
 export const AvailTypes = styled(Box)(({ color }) => ({
