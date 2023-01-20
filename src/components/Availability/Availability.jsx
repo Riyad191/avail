@@ -34,6 +34,7 @@ function Availability() {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("")
   const [lastFiveDays, setLastFiveDays] = useState([]);
+  const [openDataCard, setOpenDataCard] = useState(-1);
   // const [datesRange, setDatesRange] = useState([])
   const pillarName = useSelector((state) => state.pillarNameReducer.pillarName);
   const searchAppName = useSelector((state) => state.pillarNameReducer.filterAppName);
@@ -170,8 +171,6 @@ function Availability() {
     setShow(true);
   };
   
-  const [openDataCard, setOpenDataCard] = useState(-1);
-
   const openDataCardHandelClick = (i) => {
     if(openDataCard === i) setOpenDataCard(-1);
     else setOpenDataCard(i) 
