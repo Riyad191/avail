@@ -81,7 +81,7 @@ const  source = axios.CancelToken.source();
 } 
 //  -------------
 
-export const dataArrowsAndColors = (v) => +v > 99.95 ? iconsAndColors.success : +v < 99 && +v >= 1 ? iconsAndColors.denger : +v < 1 ? iconsAndColors.secondary : iconsAndColors.warning;
+export const dataArrowsAndColors = (v) => +v > 99.95 ? iconsAndColors.success : +v < 99 && +v >= 1 ? iconsAndColors.denger : +v === 0 ? iconsAndColors.secondary : iconsAndColors.warning;
 
 export const iconsAndColors = {
   success: { color: "#367600", icon: <BiUpArrowAlt /> },
@@ -92,7 +92,7 @@ export const iconsAndColors = {
 
 export const AvailabilityTypes = (date, percent) => {
   if(date !== "no data available"){
-   return percent > 99.95 ? <Success /> : percent < 97 && percent >= 1 || percent === null ? <Denger /> : <Warning />;
+   return percent > 99.95 ? <Success /> : percent < 97 && percent >= 1 || percent === null ? <Denger /> : percent < 1 ? <Secondary /> : <Warning />;
   }
  return <Secondary />
 }

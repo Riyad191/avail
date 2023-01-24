@@ -12,9 +12,6 @@ import "./styles.css";
 import Dates_Buttons from "./Dates_Buttons";
 import Dates_Data from "./Dates_Data";
 import { dataArrowsAndColors, getStateData } from "./Services"
-import dayjs from "dayjs";
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
 import moment from 'moment'
 
 
@@ -29,13 +26,11 @@ function Availability() {
   const [modalFlowNameVar, setModalFlowNameVar] = React.useState("");
   const [modalBoxPercentage, setModalBoxPercentage] = React.useState("");
   const [fiveMinsDataWithDates, setFiveMinsDataWithDates] = React.useState([]);
-  // const [datesRange, setDatesRange] = React.useState(recentFiveDays);
   const [noDataFound, setNoDataFound] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("")
   const [lastFiveDays, setLastFiveDays] = useState([]);
   const [openDataCard, setOpenDataCard] = useState(-1);
-  // const [datesRange, setDatesRange] = useState([])
   const pillarName = useSelector((state) => state.pillarNameReducer.pillarName);
   const searchAppName = useSelector((state) => state.pillarNameReducer.filterAppName);
   const searchFlowName = useSelector((state) => state.pillarNameReducer.filterFlowName);
@@ -49,7 +44,6 @@ function Availability() {
   const noDataAvailableMessage = "No data found";
   const source = axios.CancelToken.source();
   useEffect(() => {
-    const datesRangeArr = [{"from": availabilityDateFrom},{"to": availabilityDateTo}]
     function getDates(startDate, stopDate) {
       var dateArray = [];
       var currentDate = moment(startDate);
@@ -61,11 +55,6 @@ function Availability() {
       return dateArray;
   }
     const momentsDates = getDates(availabilityDateFrom,availabilityDateTo);
-    // console.log("dateRange(availabilityDateFrom,availabilityDateTo)",momentsDates);
-    // console.log('datesRangeArr: ',datesRangeArr)
-
-    
-    // setDatesRange()
     getStateData()
     setError("")
     setLastFiveDays([]);
@@ -93,6 +82,7 @@ function Availability() {
                 cancelToken: source.token
               }
             ).then((res) => {
+              // console.log("res.data",res.data)
               setFiveMinsData(res.data) 
               return res.data
             });

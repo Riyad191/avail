@@ -39,7 +39,7 @@ pre {
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 1px;
   height: 10px;
 }
 
