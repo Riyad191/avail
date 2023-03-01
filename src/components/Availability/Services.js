@@ -24,7 +24,11 @@ export const dataArrowsAndColors = (v) =>
     : iconsAndColors.warning;
 
 export const iconsAndColors = {
-  success: { color: "#367600", icon: <BiUpArrowAlt /> },
+  success: {
+    color: "#039177",
+    //  "#367600",
+    icon: <BiUpArrowAlt />,
+  },
   denger: { color: "#DC0909", icon: <BiDownArrowAlt /> },
   warning: { color: "#dfaf2d", icon: <CgArrowsExchangeV /> },
   secondary: { color: "#787878", icon: <IoIosRemove /> },

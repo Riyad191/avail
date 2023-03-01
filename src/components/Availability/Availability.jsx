@@ -52,12 +52,15 @@ function Availability() {
   const availabilityDateTo = useSelector(
     (state) => state.pillarNameReducer.availabilityDateTo
   );
+
   const pillarNameParam = !pillarName
     ? "TRANSPORTATION"
     : pillarName.toUpperCase();
 
   const noDataAvailableMessage = "No data found";
   const source = axios.CancelToken.source();
+
+  /* Api call */
   useEffect(() => {
     function getDates(startDate, stopDate) {
       var dateArray = [];
@@ -69,9 +72,7 @@ function Availability() {
       }
       return dateArray;
     }
-
     const momentsDates = getDates(availabilityDateFrom, availabilityDateTo);
-
     setError("");
     setLastFiveDays([]);
     setNoDataFound([]);
@@ -134,7 +135,6 @@ function Availability() {
             const orgArr = appMap[appData.index];
             const dataArr = new Array(5).fill(newArr);
             const finalArr = dataArr.map((n, i) => orgArr[i] ?? n);
-            // appData.date_and_percentage = finalArr;
             appData.date_and_percentage = appMap[appData.index];
           });
         });
@@ -157,6 +157,9 @@ function Availability() {
     };
   }, [pillarNameParam, availabilityDateTo]);
 
+  /**
+   * dispatching data
+   * */
   useEffect(() => {
     if (fiveMinsDataWithDates.length != 0) {
       setLoading(false);
