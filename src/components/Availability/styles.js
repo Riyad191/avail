@@ -18,14 +18,44 @@ export const MainBox = styled(Box)(() => ({
   flexWrap: "wrap",
   justifyContent: "center",
   alignItems: "flex-start",
-  overflow: "scroll",
+  overflowY: "scroll",
   color: "#636363",
+  height: "85%",
 }));
 
-export const DataBars = styled(Box)(() => ({
+export const AvailTypes = styled(Box)(({ color }) => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
+  background: color,
+}));
+
+export const Success = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#367600",
+}));
+
+export const Denger = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#DC0909",
+}));
+
+export const Warning = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#dfaf2d",
+}));
+
+export const Secondary = styled(Box)(() => ({
+  height: "50px",
+  width: "7px",
+  borderRadius: "40px",
+  background: "#787878",
 }));
 
 export const DataCard = styled(Button)(() => ({
@@ -41,7 +71,7 @@ export const DataCard = styled(Button)(() => ({
   margin: 8,
   boxShadow: "2px 2px 8px 2px #CFCFCF",
   cursor: "pointer",
-  color: "#000A37"
+  color: "#000A37",
 }));
 
 export const SectionBox = styled(Box)(() => ({
@@ -79,6 +109,21 @@ export const BoxInfo = styled(Box)(() => ({
   flexDirection: "column",
   width: "100%",
 }));
+
+export const PopUpButton = styled(Box)({
+  color: "#FFF",
+  background: "#010377",
+  display: "flex",
+  padding: "2px",
+  justifyContent: "space-between",
+  alignItems: "center",
+  borderRadius: "5px",
+  fontSize: 20,
+  "&:hover": {
+    background: "#cacaca",
+    color: "#010377",
+  },
+});
 
 export const BoxPercentage = styled(Box)(() => ({
   display: "flex",
@@ -129,20 +174,38 @@ export const CardTitle = styled(Stack)(() => ({
 
 export const Element = styled(Box)(() => ({
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
   alignItems: "center",
-  flexDirection: "column",
-  width: "33%",
+  width: "100%",
 }));
 
 export const Title = styled(Box)(() => ({
-  margin: "5px 0",
+  margin: "5px 3px",
   width: "100%",
   textAlign: "center",
   background: "#e2e2e2",
   padding: "5px 0",
   borderRadius: "3px",
-  color: "#000"
+  color: "#000",
+}));
+
+export const AppServiceTitle = styled(Box)(() => ({
+  margin: "0px 3px",
+  width: "100%",
+  textAlign: "center",
+  background: "#fff",
+  padding: "5px 0",
+  borderRadius: "3px",
+  color: "#000",
+}));
+export const Title_1 = styled(Box)(() => ({
+  margin: "5px 0",
+  width: "60%",
+  textAlign: "center",
+  background: "#e2e2e2",
+  padding: "5px 0",
+  borderRadius: "3px",
+  color: "#000",
 }));
 
 export const Info = styled(Box)(() => ({

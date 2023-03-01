@@ -7,8 +7,16 @@ function Loading() {
   const error = useSelector((state) => state.rootReducer.error);
   return (
     <Box>
-      {loading && <Typography variant="h2" sx={{ color: "#730C00" }}>loading...</Typography>}
-      {error && !loading && <Typography variant="h5" sx={{ color: "#730C00" }}>{error}</Typography>}
+      {loading && (
+        <Typography variant="h2" sx={{ color: "#730C00" }}>
+          loading...
+        </Typography>
+      )}
+      {error && !loading && (
+        <Typography variant="h5" sx={{ color: "#730C00" }}>
+          {error}
+        </Typography>
+      )}
     </Box>
   );
 }

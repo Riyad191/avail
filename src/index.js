@@ -16,19 +16,24 @@ var logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
 // middleware
-const middleware = [ sagaMiddleware, logger ];
+const middleware = [
+  sagaMiddleware,
+  // logger
+];
 
 // store
-var store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(
+  allReducers,
+  {},
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 // run saga
 sagaMiddleware.run(rootSaga);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
