@@ -34,7 +34,7 @@ export const Success = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "#367600",
+  background: "#039177",
 }));
 
 export const Denger = styled(Box)(() => ({
