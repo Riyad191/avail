@@ -7,12 +7,10 @@ import { Availability } from "./components";
 import ButtonsComponent from "./components/Tools/ButtonsComponent";
 import FormComponent from "./components/Tools/FormComponent";
 import "./styles/styles.css";
-import { useSelector, useDispatch  } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
-  // const pillarName = useSelector(state => state.pillarNameReducer.pillarName)
- const AppPaper = styled(Paper)(() => ({
+  const AppPaper = styled(Paper)(() => ({
     height: "100vh",
     display: "flex",
     justifyContent: "space-between",
@@ -21,14 +19,21 @@ const App = () => {
     background: "#F1F1F1",
     width: "100%",
   }));
-  
+
   return (
     <BrowserRouter>
       <AppPaper>
         <Navbar />
         <Routes>
-         <Route path="/" element={<Navigate to={`/availability/Transportation`} />} />
-          <Route exact path="/availability/:pillar" element={<Availability />} />
+          <Route
+            path="/"
+            element={<Navigate to={`/availability/Transportation`} />}
+          />
+          <Route
+            exact
+            path="/availability/:pillar"
+            element={<Availability />}
+          />
         </Routes>
         <Footer />
       </AppPaper>

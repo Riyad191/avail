@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import * as actionTypes from "./actions";
 
-
 const initialState = {
   data: [],
   loading: false,
   error: "",
-  
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,8 +31,8 @@ const pillarsInitialState = {
   mainData: [],
   barsData: null,
   recentFiveDays: [],
-}
-const pillarNameReducer = (state = pillarsInitialState , action) => {
+};
+const pillarNameReducer = (state = pillarsInitialState, action) => {
   switch (action.type) {
     case actionTypes.PILLAR_BUTTON:
       return { ...state, pillarName: action.payload };
@@ -45,7 +43,7 @@ const pillarNameReducer = (state = pillarsInitialState , action) => {
     case actionTypes.CARD_TITLE:
       return { ...state, cardTitleData: action.payload };
     case actionTypes.APP_NAME:
-      return { ...state, filterAppName:  action.payload};
+      return { ...state, filterAppName: action.payload };
     case actionTypes.FLOW_NAME:
       return { ...state, filterFlowName: action.payload };
     case actionTypes.MAIN_DATA:

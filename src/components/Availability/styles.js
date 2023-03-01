@@ -27,35 +27,35 @@ export const AvailTypes = styled(Box)(({ color }) => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: color
+  background: color,
 }));
 
 export const Success = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "#367600"
+  background: "#367600",
 }));
 
 export const Denger = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "#DC0909"
+  background: "#DC0909",
 }));
 
 export const Warning = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "#dfaf2d"
+  background: "#dfaf2d",
 }));
 
 export const Secondary = styled(Box)(() => ({
   height: "50px",
   width: "7px",
   borderRadius: "40px",
-  background: "#787878"
+  background: "#787878",
 }));
 
 export const DataCard = styled(Button)(() => ({
@@ -71,7 +71,7 @@ export const DataCard = styled(Button)(() => ({
   margin: 8,
   boxShadow: "2px 2px 8px 2px #CFCFCF",
   cursor: "pointer",
-  color: "#000A37"
+  color: "#000A37",
 }));
 
 export const SectionBox = styled(Box)(() => ({
@@ -118,7 +118,7 @@ export const PopUpButton = styled(Box)({
   justifyContent: "space-between",
   alignItems: "center",
   borderRadius: "5px",
-  fontSize:20,
+  fontSize: 20,
   "&:hover": {
     background: "#cacaca",
     color: "#010377",
@@ -186,9 +186,9 @@ export const Title = styled(Box)(() => ({
   background: "#e2e2e2",
   padding: "5px 0",
   borderRadius: "3px",
-  color: "#000"
+  color: "#000",
 }));
- 
+
 export const AppServiceTitle = styled(Box)(() => ({
   margin: "0px 3px",
   width: "100%",
@@ -196,7 +196,7 @@ export const AppServiceTitle = styled(Box)(() => ({
   background: "#fff",
   padding: "5px 0",
   borderRadius: "3px",
-  color: "#000"
+  color: "#000",
 }));
 export const Title_1 = styled(Box)(() => ({
   margin: "5px 0",
@@ -205,7 +205,7 @@ export const Title_1 = styled(Box)(() => ({
   background: "#e2e2e2",
   padding: "5px 0",
   borderRadius: "3px",
-  color: "#000"
+  color: "#000",
 }));
 
 export const Info = styled(Box)(() => ({

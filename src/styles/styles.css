@@ -30,7 +30,9 @@ pre {
   border-radius: 7px;
 }
 
-::-webkit-scrollbar-corner { background: rgba(0,0,0,0.5); }
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.5);
+}
 
 * {
   scrollbar-width: thin;

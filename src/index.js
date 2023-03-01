@@ -1,6 +1,3 @@
-
-
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -11,7 +8,6 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./store/rootSaga";
 import { createLogger } from "redux-logger";
-import Api from "./api2"
 
 // logger
 var logger = createLogger();
@@ -20,25 +16,24 @@ var logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
 // middleware
-const middleware = [ sagaMiddleware, 
+const middleware = [
+  sagaMiddleware,
   // logger
- ];
+];
 
 // store
-const store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(
+  allReducers,
+  {},
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 // run saga
 sagaMiddleware.run(rootSaga);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <Provider store={store}>
-      <App />
-      {/* <Api/> */}
-    </Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
-
-
-
-
- 
