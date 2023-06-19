@@ -1,20 +1,8 @@
 import React from "react";
-import {
-  BoxInfo,
-  BoxPercentage,
-  BoxInfoSection,
-  GreenBars,
-  Uptime,
-} from "./styles";
-import { Typography, Box, Stack, styled, Modal } from "@mui/material";
+import { BoxInfo, BoxPercentage, BoxInfoSection, GreenBars, Uptime } from "./styles";
+import { Typography, Box, Stack } from "@mui/material";
 
-function Availablitiy_Info({ data, show, index, openModal, setOpenModal }) {
-  const SytledModal = styled(Modal)({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  });
-
+function Availablitiy_Info({ data }) {
   return (
     <BoxInfo>
       <BoxInfoSection>
@@ -30,15 +18,9 @@ function Availablitiy_Info({ data, show, index, openModal, setOpenModal }) {
         {info(data).map((x, i) => {
           return (
             <Box key={i}>
-              <Typography fontSize="12px" color="#000">
-                {Object.keys(x)}
-              </Typography>
-              <Stack
-                direction="row"
-                sx={{ justifyContent: "center", alignItems: "center" }}
-              >
-                <Box className="span" />
-                {`${Object.values(x)}%`}
+              <Typography fontSize="12px" color="#000">{Object.keys(x)}</Typography>
+              <Stack direction="row" sx={{ justifyContent: "center", alignItems: "center" }}>
+                <Box className="span" />{`${Object.values(x)}%`}
               </Stack>
             </Box>
           );

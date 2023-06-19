@@ -4,28 +4,17 @@ import { ArrowBox, BoxFn } from "./styles";
 import { useSelector } from "react-redux";
 import { FcCalendar } from "react-icons/fc";
 
-const ButtonsAndDates = ({
-  item,
-  dataArrowsAndColors,
-  modalStates,
-  lastFiveDays,
-  setOpenModal,
-}) => {
-  const recentFiveDays = useSelector(
-    (state) => state.pillarNameReducer.recentFiveDays
-  );
+const ButtonsAndDates = ({ item, dataArrowsAndColors, modalStates, lastFiveDays, setOpenModal }) => {
+  const recentFiveDays = useSelector((state) => state.pillarNameReducer.recentFiveDays);
   const firstTitleDate = recentFiveDays[0];
   const lastTitleDate = recentFiveDays[recentFiveDays.length - 1];
+  
   let newCreateDate = recentFiveDays.filter(
     (val) =>
       ![
         ...new Set(
           item.date_and_percentage
-            .map((z) =>
-              z
-                .map((a) => a.create_date.slice(0, 10))
-                .filter((m) => m !== "no data av")
-            )
+            .map((z) => z.map((a) => a.create_date.slice(0, 10)).filter((m) => m !== "no data av"))
             .map((t) => [...new Set(t)])
             .flat()
         ),
@@ -76,9 +65,7 @@ const ButtonsAndDates = ({
             alignItems: "center",
           }}
         >
-          <span style={{ fontSize: "17px", margin: "6px 4px 0 0" }}>
-            <FcCalendar />
-          </span>
+          <span style={{ fontSize: "17px", margin: "6px 4px 0 0" }}> <FcCalendar /> </span>
           <span
             style={{ color: "rgb(7, 18, 138)", fontSize: "13px" }}
           >{`${lastTitleDate.slice(5)}-${lastTitleDate.slice(
@@ -95,19 +82,15 @@ const ButtonsAndDates = ({
         sx={{
           overflow: "auto",
           display: "flex",
-          justifyContent:
-            item.date_and_percentage.length < 6 ? "space-around" : "flex-start",
+          justifyContent: item.date_and_percentage.length < 6 ? "space-around" : "flex-start",
           alignItems: "center",
         }}
       >
         {item.date_and_percentage
           .map((innerItem, idx) => {
-            const bottomDates = innerItem
-              .filter((a) => a.create_date !== "no data available")
-              .map((a) => a.create_date);
+            const bottomDates = innerItem.filter((a) => a.create_date !== "no data available").map((a) => a.create_date);
             const uniqueBottomDate = [...new Set(bottomDates)];
-            const len = item.date_and_percentage
-              .map((innerItem) =>
+            const len = item.date_and_percentage.map((innerItem) =>
                 innerItem.filter((a) => a.create_date !== "no data available")
               )
               .filter((a) => a.length !== 0);

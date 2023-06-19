@@ -1,18 +1,11 @@
 import * as React from "react";
-import { Box, Button, Stack, styled, Typography } from "@mui/material";
-import {
-  Store,
-  LocalShipping,
-  Support,
-  Storefront,
-  Inventory,
-  EmojiTransportation,
-} from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+import { Store, LocalShipping, Support, Storefront, Inventory, EmojiTransportation } from "@mui/icons-material";
 import { StyledStack, StyledButton, IconTyopgraphy } from "./styles";
-import FormComponent from "./FormComponent";
 import { setPillarName } from "../../store/actionCreater";
-import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import FormComponent from "./FormComponent";
 
 const ButtonsComponent = () => {
   const navigate = useNavigate();

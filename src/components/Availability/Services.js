@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from "react-redux";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { CgArrowsExchangeV } from "react-icons/cg";
 import { IoIosRemove } from "react-icons/io";
@@ -24,11 +23,7 @@ export const dataArrowsAndColors = (v) =>
     : iconsAndColors.warning;
 
 export const iconsAndColors = {
-  success: {
-    color: "#039177",
-    //  "#367600",
-    icon: <BiUpArrowAlt />,
-  },
+  success: { color: "#039177", icon: <BiUpArrowAlt /> },
   denger: { color: "#DC0909", icon: <BiDownArrowAlt /> },
   warning: { color: "#dfaf2d", icon: <CgArrowsExchangeV /> },
   secondary: { color: "#787878", icon: <IoIosRemove /> },

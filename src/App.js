@@ -1,13 +1,11 @@
 import React from "react";
-import { Box, Paper, styled } from "@mui/material";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Paper, styled } from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Availability } from "./components";
-import ButtonsComponent from "./components/Tools/ButtonsComponent";
-import FormComponent from "./components/Tools/FormComponent";
 import "./styles/styles.css";
-import { useSelector, useDispatch } from "react-redux";
+ 
 
 const App = () => {
   const AppPaper = styled(Paper)(() => ({

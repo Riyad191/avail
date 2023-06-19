@@ -1,36 +1,16 @@
 import * as React from "react";
-import {
-  TextField,
-  Box,
-  Typography,
-  Autocomplete,
-  styled,
-} from "@mui/material";
+import { setFlowNameData, setAppNameData, seAvailabilityDateFrom, seAvailabilityDateTo } from "../../store/actionCreater";
+import { TextField, Box, Typography, Autocomplete, styled, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setFlowNameData,
-  setAppNameData,
-  seAvailabilityDateFrom,
-  seAvailabilityDateTo,
-} from "../../store/actionCreater";
-import { Tooltip } from "@mui/material";
 
 const FormComponent = () => {
   const dispatch = useDispatch();
-  const cardTitleData = useSelector(
-    (state) => state.pillarNameReducer.cardTitleData
-  );
+  const todaysAvailability = useSelector((state) => state.pillarNameReducer.todaysAvailability);
+  const searchFlowName = useSelector((state) => state.pillarNameReducer.filterFlowName);
+  const cardTitleData = useSelector((state) => state.pillarNameReducer.cardTitleData);
+  const searchAppName = useSelector((state) => state.pillarNameReducer.filterAppName);
   const mainData = useSelector((state) => state.pillarNameReducer.mainData);
   const appsNum = useSelector((state) => state.pillarNameReducer.appsNum);
-  const todaysAvailability = useSelector(
-    (state) => state.pillarNameReducer.todaysAvailability
-  );
-  const searchAppName = useSelector(
-    (state) => state.pillarNameReducer.filterAppName
-  );
-  const searchFlowName = useSelector(
-    (state) => state.pillarNameReducer.filterFlowName
-  );
 
   const AvailbilityPercentageBox = styled(Box)(() => ({
     display: "flex",
@@ -70,42 +50,22 @@ const FormComponent = () => {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={
-                mainData.length == 0
-                  ? ["No Applications"].map((a) => a)
-                  : [...new Set(cardTitleData.map((a) => a.app_name))]
-              }
+              options={ mainData.length == 0 ? ["No Applications"].map((a) => a) : [...new Set(cardTitleData.map((a) => a.app_name))] }
               sx={{ marginRight: 1, width: 300 }}
-              onChange={(e, newVal) => {
-                return dispatch(setAppNameData(newVal === null ? "" : newVal));
-              }}
+              onChange={(e, newVal) => dispatch(setAppNameData(newVal === null ? "" : newVal))}
               value={searchAppName}
-              renderInput={(params) => (
-                <TextField {...params} label="App Name" size="small" />
-              )}
+              renderInput={(params) => <TextField {...params} label="App Name" size="small" /> }
             />
           </Tooltip>
-          <Tooltip
-            title={`search by service name`}
-            placement="top"
-            followCursor
-          >
+          <Tooltip title={`search by service name`} placement="top" followCursor>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={
-                mainData.length == 0
-                  ? ["No Services"].map((a) => a)
-                  : [...new Set(cardTitleData.map((a) => a.service_name))]
-              }
+              options={ mainData.length == 0 ? ["No Services"].map((a) => a) : [...new Set(cardTitleData.map((a) => a.service_name))] }
               sx={{ marginRight: 1, width: 300 }}
-              onChange={(e, newVal) =>
-                dispatch(setFlowNameData(newVal === null ? "" : newVal))
-              }
+              onChange={(e, newVal) => dispatch(setFlowNameData(newVal === null ? "" : newVal))}
               value={searchFlowName}
-              renderInput={(params) => (
-                <TextField {...params} label="Service Name" size="small" />
-              )}
+              renderInput={(params) => <TextField {...params} label="Service Name" size="small" /> }
             />
           </Tooltip>
           From:&nbsp;&nbsp;
@@ -144,9 +104,7 @@ const FormComponent = () => {
             <Typography>
               <span style={{ color: "#4d4d4d" }}>Overall Availability:</span>
               &nbsp;{" "}
-              {todaysAvailability > 1
-                ? `${todaysAvailability.toPrecision(3)}`
-                : "0.00"}
+              {todaysAvailability > 1 ? `${todaysAvailability.toPrecision(3)}` : "0.00"}
               % &nbsp;{" "}
               <span style={{ color: "#4d4d4d" }}> ({appsNum} apps)</span>
             </Typography>
