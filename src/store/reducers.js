@@ -19,19 +19,21 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
 const pillarsInitialState = {
-  pillarName: "",
-  appsNum: null,
-  todaysAvailability: 0,
-  cardTitleData: [],
-  filterAppName: "",
-  filterFlowName: "",
   availabilityDateFrom: "",
   availabilityDateTo: "",
-  mainData: [],
-  barsData: null,
+  todaysAvailability: 0,
+  filterFlowName: "",
   recentFiveDays: [],
+  cardTitleData: [],
+  filterAppName: "",
+  pillarName: "",
+  barsData: null,
+  appsNum: null,
+  mainData: [],
 };
+
 const pillarNameReducer = (state = pillarsInitialState, action) => {
   switch (action.type) {
     case actionTypes.PILLAR_BUTTON:

@@ -1,34 +1,29 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { createStore, applyMiddleware } from "redux";
-import allReducers from "./store/reducers";
-import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import rootSaga from "./store/rootSaga";
 import { createLogger } from "redux-logger";
+import allReducers from "./store/reducers";
+import ReactDOM from "react-dom/client";
+import rootSaga from "./store/rootSaga";
+import { Provider } from "react-redux";
+import React from "react";
+import App from "./App";
 
-// logger
+
+
+/* logger */
 var logger = createLogger();
 
-// saga
+/* saga */
 const sagaMiddleware = createSagaMiddleware();
 
-// middleware
-const middleware = [
-  sagaMiddleware,
-  // logger
-];
+/* middleware */
+const middleware = [sagaMiddleware];
 
-// store
-const store = createStore(
-  allReducers,
-  {},
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+/* store */
+const store = createStore(allReducers,{},composeWithDevTools(applyMiddleware(...middleware)));
 
-// run saga
+/* run saga */
 sagaMiddleware.run(rootSaga);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
